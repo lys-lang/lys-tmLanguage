@@ -14,17 +14,17 @@ function readYaml(fileName: string) {
 }
 
 function buildGrammar() {
-  const tsGrammar = readYaml("../DataWeave.YAML-tmLanguage");
+  const tsGrammar = readYaml("../Lys.YAML-tmLanguage");
 
   // Write TypeScript.tmLanguage
-  writePlistFile(tsGrammar, "../DataWeave.tmLanguage");
+  writePlistFile(tsGrammar, "../Lys.tmLanguage");
 }
 
 // function buildTheme() {
-//   const tsTheme = readYaml("../DataWeave.YAML-tmTheme");
+//   const tsTheme = readYaml("../Lys.YAML-tmTheme");
 
 //   // Write TypeScript.tmTheme
-//   writePlistFile(tsTheme, "../DataWeave.tmTheme");
+//   writePlistFile(tsTheme, "../Lys.tmTheme");
 // }
 
 buildGrammar();
