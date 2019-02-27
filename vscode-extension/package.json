@@ -1,0 +1,35 @@
+{
+  "name": "lys",
+  "displayName": "Lys",
+  "description": "Lys language support",
+  "version": "0.0.4",
+  "publisher": "menduz",
+  "engines": {
+    "vscode": "^1.31.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "lys",
+        "aliases": [
+          "Lys",
+          "lys"
+        ],
+        "extensions": [
+          ".lys"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "lys",
+        "scopeName": "source.lys",
+        "path": "./syntaxes/Lys.tmLanguage"
+      }
+    ]
+  }
+}

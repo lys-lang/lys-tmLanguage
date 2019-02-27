@@ -10,37 +10,35 @@ patterns:
       "1": { name: keyword.other.lys }
       "2": { name: entity.name.package.lys }
   - include: "#imports"
-  - include: "#statements"
+  - include: "#functions"
+  - include: "#variables"
+  - include: "#typedefs"
+  - include: "#enums"
+  - include: "#structs"
+  - include: "#impl"
 repository:
   impl:
-    begin: (?<!::)(?=\b(?:impl)\b)
-    end: (?=$|\})
+    name: meta.impl.lys
+    begin: '\b(impl)\b(?:\s+([a-zA-Z_$][\w$]+))?\s*'
+    beginCaptures:
+      "1": { name: storage.type.type.lys }
+      "2": { name: entity.name.type.lys }
+    end: (?=\})
     patterns:
       - include: "#comments"
-      - begin: \b(impl)\b
-        beginCaptures:
-          "1": { name: storage.type.type.lys }
-        end: (?=<|\{|\(|:|$)
+      - begin: \{
+        end: $|\}
         patterns:
           - include: "#comments"
-          - name: entity.name.type.type.lys
-            match: \w+
-      - begin: <
-        end: ">"
-        patterns:
-          - include: "#generics"
-      - begin: \{
-        end: \}
-        patterns:
-          - include: "#statements"
+          - include: "#functions"
+          - include: "#variables"
   wasm:
-    begin: (?=(?:%wasm)\b)
+    begin: (?=(%wasm)\b)
+    beginCaptures:
+      "1": { name: keyword.lys }
     end: (?=$|\})
     patterns:
       - include: "#comments"
-      - match: (%wasm)\b
-        captures:
-          "1": { name: keyword.lys }
       - begin: \{
         end: \}
         patterns:
@@ -50,8 +48,8 @@ repository:
           - include: "#wasm_keywords"
           - include: "#wasm_variables"
   structs:
-    begin: (?<!::)(?=\b(?:struct)\b)
-    end: (?=$|\})
+    begin: (?=\b(?:struct)\b)
+    end: (?=$|\))
     patterns:
       - include: "#comments"
       - begin: \b(struct)\b
@@ -59,13 +57,18 @@ repository:
           "1": { name: storage.type.class.lys }
         end: (?=<|\{|\(|:|$)
         patterns:
-          - include: "#comments"
-          - name: entity.name.type.lys
-            match: \w+
+          - include: "#headless_struct"
+  headless_struct:
+    begin: (?=\w+)
+    end: (?=$|\))
+    patterns:
+      - include: "#comments"
       - begin: <
         end: ">"
         patterns:
           - include: "#generics"
+      - name: entity.name.type.lys
+        match: \w+
       - begin: \(
         end: \)
         patterns:
@@ -95,28 +98,29 @@ repository:
         end: \)
         patterns:
           - include: "#expressions"
+      - begin: \{
+        end: \}
+        patterns:
+          - include: "#expressions"
       - include: "#wasm"
-      - include: "#types"
       - include: "#strings"
       - include: "#constants"
       - include: "#comments"
+      - include: "#functions"
+      - include: "#variables"
       - include: "#keywords"
   functions:
-    begin: (?=\s*\b(?:fun)\b)
+    name: meta.function.lys
+    begin: (?:(fun)\s+(\w+|\|\||&&|&|\||\+\+|\-\-|\+|\-|==|!=|==|!==|<=|>=|<<|>>>|>>|<|>|/|\*|\*\*|%|~|\^))
+    beginCaptures:
+      "1": { name: storage.type.function.lys }
+      "2": { name: meta.definition.function.lys entity.name.function.lys }
     end: (?=$|\})
     patterns:
-      - begin: \b(fun)\b
-        beginCaptures:
-          "1": { name: storage.type.function.lys }
-        end: (?=\()
+      - begin: "<"
+        end: ">"
         patterns:
-          - match: (\w+|\|\||&&|&|\||\+\+|\-\-|\+|\-|==|!=|==|!==|<=|>=|<<|>>>|>>|<|>|/|\*|\*\*|%|~|\^)
-            captures:
-              "1": { name: entity.name.function.lys }
-          - begin: <
-            end: ">"
-            patterns:
-              - include: "#generics"
+          - include: "#generics"
       - begin: \(
         end: \)
         patterns:
@@ -124,14 +128,10 @@ repository:
       - begin: (?=:)
         beginCaptures:
           "1": { name: keyword.operator.declaration.lys }
-        end: (?={|=|$)
+        end: (?==|$)
         patterns:
           - include: "#types"
-      - begin: \{
-        end: (?=\})
-        patterns:
-          - include: "#statements"
-      - begin: (=)
+      - begin: (=(\r|\n|$)*)
         beginCaptures:
           "1": { name: keyword.operator.assignment.lys }
         end: (?=$)
@@ -157,7 +157,7 @@ repository:
   keywords:
     patterns:
       - name: storage.modifier.lys
-        match: \b(var|val|public|private|protected|abstract|final|sealed|enum|open|attribute|annotation|override|inline|vararg|in|out|internal|tailrec|operator|infix|const|yield|typealias|typeof|reified|suspend)\b
+        match: \b(public|private|protected|abstract|final|sealed|enum|open|attribute|annotation|override|inline|vararg|in|out|internal|tailrec|operator|infix|const|yield|typealias|typeof|reified|suspend)\b
       - name: keyword.control.lys
         match: \b(if|else|while|for|loop|case|do|return|when|where|break|continue|match)\b
       - name: keyword.control.lys
@@ -193,14 +193,6 @@ repository:
       - include: "#keywords"
       - name: variable.parameter.function.lys
         match: \w+
-  statements:
-    patterns:
-      - include: "#typedefs"
-      - include: "#structs"
-      - include: "#impl"
-      - include: "#functions"
-      - include: "#variables"
-      - include: "#expressions"
   strings:
     patterns:
       - name: string.quoted.third.lys
@@ -244,19 +236,38 @@ repository:
         end: "`"
         endCaptures:
           "0": { name: punctuation.definition.string.end.lys }
-  typedefs:
-    begin: (?=\s*(?:type|enum))
-    end: (?=\{?$)
+  enums:
+    begin: (?:\s*(enum)\s*([a-zA-Z][a-zA-Z0-9_]*))
+    end: (?=\}?$)
+    captures:
+      "1": { name: storage.type.class.lys }
+      "2": { name: entity.name.type.lys }
     patterns:
-      - name: storage.type.class.lys
-        match: \b(type|enum)\b
-      - match: ([a-zA-Z][a-zA-Z0-9_]*)
-        name: entity.name.type.lys
       - begin: <
         end: ">"
         patterns:
           - include: "#generics"
-      - include: "#expressions"
+      - begin: \{
+        end: \}
+        patterns:
+          - include: "#headless_struct"
+  typedefs:
+    begin: (?:\s*(type)\s*([a-zA-Z][a-zA-Z0-9_]*))
+    end: (?=\}?$)
+    captures:
+      "1": { name: storage.type.class.lys }
+      "2": { name: entity.name.type.lys }
+    patterns:
+      - begin: <
+        end: ">"
+        patterns:
+          - include: "#generics"
+      - begin: (=)
+        end: (?=\}?$)
+        captures:
+          "1": { name: keyword.operator.declaration.lys }
+        patterns:
+          - include: "#types"
   types:
     patterns:
       - name: storage.type.buildin.lys
@@ -274,10 +285,9 @@ repository:
         patterns:
           - include: "#types"
           - include: "#keywords"
-      - begin: \{
-        end: \}
-        patterns:
-          - include: "#statements"
+      - include: "#comments"
+      - name: keyword.operator.or.lys
+        match: (\|)
       - begin: \(
         end: \)
         patterns:
@@ -294,18 +304,18 @@ repository:
         match: (->)
   variables:
     begin: (?=\s*\b(?:var|val)\b)
-    end: (?=:|=|(\b(by)\b)|$)
+    end: (?=:|=|$)
     patterns:
       - begin: \b(var|val)\b
         beginCaptures:
           "1": { name: storage.type.var.lys }
-        end: (?=:|=|(\b(by)\b)|$)
+        end: (?=:|=|$)
         patterns:
           - begin: <
             end: ">"
             patterns:
               - include: "#generics"
-          - match: ([\.<\?>\w]+\.)?(\$?\w+)
+          - match: ([\.<\?>\w]+\.)?([\$\w_]+)
             captures:
               "2": { name: entity.name.variable.lys }
       - begin: (?=:)
@@ -314,19 +324,12 @@ repository:
         end: (?==|$)
         patterns:
           - include: "#types"
-      - begin: \b(by)\b
-        beginCaptures:
-          "1": { name: keyword.other.lys }
-        end: (?=$)
-        patterns:
-          - include: "#expressions"
       - begin: (=)
         beginCaptures:
           "1": { name: keyword.operator.assignment.lys }
         end: (?=$)
         patterns:
           - include: "#expressions"
-
   wasm_string:
     name: string.quoted.double.wasm
     begin: (?<!\\)(")
