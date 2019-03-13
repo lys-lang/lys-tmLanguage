@@ -1,0 +1,597 @@
+#################################################################
+## Iro
+################################################################ 
+##
+## * Press Ctrl + '+'/'-' To Zoom in
+## * Press Ctrl + S to save and recalculate... 
+## * Documents are saved to web storage.
+## * Only one save slot supported.
+## * Matches cannot span lines.
+## * Unicode chars must be defined in \u0000 to \uffff format.
+## * All matches must be contained by a single group ( ... )
+## * Look behinds not permitted, (?<= or (?<!
+## * Look forwards are permitted (?= or (?!
+## * Constants are defined as __my_const = (......)
+## * The \= format allows unescaped regular expressions
+## * Constants referenced by match \= $${__my_const}
+## * Constants can reference other constants
+## * You are free to delete all the default scopes.
+## * Twitter : ainslec , Web: http://eeyo.io/iro
+##
+################################################################
+
+name                   = lys
+file_extensions []     = lys;
+
+################################################################
+## Constants
+################################################################
+
+
+################################################################
+## Styles
+################################################################
+
+styles [] {
+
+.comment : style {
+  color                 = light_grey
+  italic                = true
+  ace_scope             = comment
+  textmate_scope        = comment
+  pygments_scope        = Comment
+}
+
+.doccomment : style {
+  color                 = light_green
+  ace_scope             = comment.block.documentation
+  textmate_scope        = comment.block.documentation
+  pygments_scope        = Comment.Multiline
+}
+
+.decorator : style {
+  color                 = light_green
+  ace_scope             = comment.block.preprocessor
+  textmate_scope        = comment.block.preprocessor
+  pygments_scope        = Name.Decorator
+}
+
+.decoratorName : style {
+  color                 = white
+  ace_scope             = entity.other.attribute-name
+  textmate_scope        = entity.other.attribute-name
+  pygments_scope        = Name.Decorator
+}
+
+
+.keyword : style {
+  color                 = cyan
+  ace_scope             = keyword
+  textmate_scope        = keyword
+  pygments_scope        = Keyword
+}
+
+.modifier : style {
+  color                 = cyan
+  ace_scope             = storage.modifier
+  textmate_scope        = storage.modifier
+  pygments_scope        = Keyword
+}
+
+.numeric : style {
+  color                 = gold
+  ace_scope             = constant.numeric
+  textmate_scope        = constant.numeric
+  pygments_scope        = Number
+}
+
+.boolean : style {
+  color                 = gold
+  ace_scope             = constant.language
+  textmate_scope        = constant.language
+  pygments_scope        = Keyword.Constant
+}
+
+
+.punctuation : style {
+  color     = red_2
+  ace_scope             = punctuation
+  textmate_scope        = punctuation
+  pygments_scope        = Punctuation
+}
+
+.accessor : style {
+  color                   = red_2
+  ace_scope             = punctuation.accessor
+  textmate_scope        = punctuation.accessor
+  pygments_scope        = Punctuation
+}
+
+
+.string : style {
+  color                 = brown
+  ace_scope             = string
+  textmate_scope        = string
+  pygments_scope        = String
+}
+
+.text : style {
+  color                 = grey
+  ace_scope             = text
+  textmate_scope        = text
+  pygments_scope        = Generic
+}
+
+.nameIdentifier : style {
+  color                 = white
+  ace_scope             = variable.other.readwrite.ts
+  textmate_scope        = variable.other.readwrite.ts
+  pygments_scope        = Name.Variable
+}
+
+.operator : style {
+  color                 = orange
+  ace_scope             = keyword.operator
+  textmate_scope        = keyword.operator
+  pygments_scope        = Operator
+}
+
+.funKeyword  : style {
+  color                 = cyan
+  italic                = true
+  ace_scope             = storage.type.function.lys
+  textmate_scope        = storage.type.function.lys
+  pygments_scope        = Keyword.Declaration
+}
+
+.typeKeyword  : style {
+  color                 = cyan
+  italic                = true
+  ace_scope             = storage.type.type.lys
+  textmate_scope        = storage.type.type.lys
+  pygments_scope        = Keyword.Declaration
+}
+
+.functionName : style {
+  color                 = white
+  italic                = true
+  ace_scope             = entity.name.function
+  textmate_scope        = entity.name.function
+  pygments_scope        = Name.Function
+}
+
+.typeDeclName : style {
+  color                 = white
+  italic                = true
+  ace_scope             = entity.name.class
+  textmate_scope        = entity.name.class
+  pygments_scope        = Name.Class
+}
+
+.varKeyword  : style {
+  color                 = cyan
+  italic                = true
+  ace_scope             = storage.type.var
+  textmate_scope        = storage.type.var
+  pygments_scope        = Keyword.Declaration
+}
+
+.varName : style {
+  color                 = white
+  italic                = true
+  ace_scope             = entity.name.variable
+  textmate_scope        = entity.name.variable
+  pygments_scope        = Name.Variable
+}
+
+.const : style {
+  color                 = blue
+  ace_scope             = variable.other.constant
+  textmate_scope        = variable.other.constant
+  pygments_scope        = Name.Constant
+}
+
+.typeName : style {
+  color                 = white
+  italic                = true
+  ace_scope             = variable.other.object
+  textmate_scope        = variable.other.object
+  pygments_scope        = Name.Variable.Class
+}
+
+
+.type : style {
+  color                 = purple
+  italic                = true
+  ace_scope             = support.type
+  textmate_scope        = support.type
+  pygments_scope        = Name.Variable.Class
+}
+
+.module : style {
+  color                 = grey
+  ace_scope             = entity.name.type.module
+  textmate_scope        = entity.name.type.module
+  pygments_scope        = Name.Namespace
+}
+
+.parameter : style {
+  color                 = white
+  ace_scope             = variable.parameter.function
+  textmate_scope        = variable.parameter.function
+  pygments_scope        = Name.Variable
+}
+
+.illegal : style {
+  color                 = white
+  background_color      = red
+  ace_scope             = invalid
+  textmate_scope        = invalid
+  pygments_scope        = Generic.Error
+}
+
+}
+
+#################################################
+## Parse contexts
+#################################################
+
+__MODULE \= ((?:[A-Za-z$_][A-Za-z0-9$_]*::)+)
+__IDENTIFIER \= ([A-Za-z$_][A-Za-z0-9$_]*)
+__CONST_IDENTIFIER \= ([A-Z][A-Z0-9_]*)
+__TYPE_IDENTIFIER \= ([A-Z][A-Za-z0-9$_]*)
+__KEYWORD \= \b(if|match|case|fun|else|loop|continue|break)\b
+__MODIFIER \= (?:%inline|%struct|\b(private))
+__OPERATOR \= (\w+|\|\||&&|&|\||\+\+|\-\-|\+|\-|==|!=|==|!==|<=|>=|<<|>>>|>>|<|>|/|\*|\*\*|%|~|\^)
+
+contexts [] {
+
+  ##############################################
+  ## Main Context - Entry point context
+  ##############################################
+
+  main : context {
+    : include "multi_line_comment" ;
+    : include "literals";
+    : inline_push {
+      regex          \= \b(fun)(\s+)$${__OPERATOR}(?:\s*(\()?)
+      styles []       = .funKeyword, .text, .functionName, .punctuation;
+      : pop {
+        regex       \= (\))
+        styles []    = .punctuation;
+      }
+      : pattern {
+        regex       \= (,)
+        styles []    = .punctuation;
+      }
+      : pattern {
+        regex          \= $${__IDENTIFIER}
+        styles []       = .parameter;
+      }
+      : include "types" ;
+    }
+    : pattern {
+      regex          \= \b(val|var)(\s+)$${__CONST_IDENTIFIER}
+      styles []       = .varKeyword, .text, .const;
+    }
+    : pattern {
+      regex          \= \b(val|var)(\s+)$${__IDENTIFIER}
+      styles []       = .varKeyword, .text, .varName;
+    }
+    : pattern {
+      regex          \= \b(import)(\s+)$${__MODULE}
+      styles []       = .varKeyword, .text, .module;
+    }
+    : pattern {
+      regex          \= \b(import)(\s+)$${__IDENTIFIER}
+      styles []       = .varKeyword, .text, .module;
+    }
+    : pattern {
+      regex          \= \b(impl)(\s+)$${__IDENTIFIER}
+      styles []       = .typeKeyword, .text, .typeDeclName;
+    }
+    : pattern {
+      regex          \= \b(type)(\s+)$${__IDENTIFIER}
+      styles []       = .typeKeyword, .text, .typeDeclName;
+    }
+    :  inline_push {
+      regex          \= \b(enum)(\s+)$${__IDENTIFIER}(?:\s+(\{)?)
+      styles []       = .typeKeyword, .text, .typeDeclName, .punctuation;
+      : pop {
+        regex       \= (\})
+        styles []    = .punctuation;
+      }
+      : inline_push {
+        regex          \= $${__IDENTIFIER}(\s*\()
+        styles []       = .typeDeclName, .punctuation;
+        : pop {
+          regex       \= (\))
+          styles []    = .punctuation;
+        }
+        : pattern {
+          regex       \= (,)
+          styles []    = .punctuation;
+        }
+        : pattern {
+          regex          \= $${__IDENTIFIER}
+          styles []       = .parameter;
+        }
+        : include "types" ;
+      }
+      : pattern {
+        regex          \= $${__IDENTIFIER}
+        styles []       = .typeDeclName;
+      }
+    }
+    :  inline_push {
+      regex          \= (%wasm)(\s*)(\{)
+      styles []       = .modifier, .text, .punctuation;
+      : pop {
+        regex       \= (\})
+        styles []    = .punctuation;
+      }
+      : include "wasm" ;
+    }
+    : pattern {
+        regex          \= (%injected)\b
+        styles []       = .typeKeyword;
+    }
+    :  inline_push {
+      regex          \= (%stack)(\s*)(\{)
+      styles []       = .modifier, .text, .punctuation;
+      : pop {
+        regex       \= (\})
+        styles []    = .punctuation;
+      }
+      : pattern {
+        regex          \= $${__IDENTIFIER}
+        styles []       = .const;
+      }
+      : pattern {
+        regex          \= (=)
+        styles []       = .punctuation;
+      }
+      : include "literals";
+    }
+    : inline_push {
+      regex          \= \b(struct)(\s+)$${__IDENTIFIER}(?:\s*(\()?)
+      styles []       = .typeKeyword, .text, .typeDeclName, .punctuation;
+      : pop {
+        regex       \= (\))
+        styles []    = .punctuation;
+      }
+      : pattern {
+        regex       \= (,)
+        styles []    = .punctuation;
+      }
+      : pattern {
+        regex          \= $${__IDENTIFIER}
+        styles []       = .parameter;
+      }
+      : include "types" ;
+    }
+    : pattern {
+      regex          \= $${__KEYWORD}
+      styles []       = .keyword;
+    }
+    : pattern {
+      regex          \= $${__MODIFIER}
+      styles []       = .modifier;
+    }
+    : pattern {
+      regex          \= $${__MODULE}
+      styles []       = .module;
+    }
+    : pattern {
+      regex          \= (\->)
+      styles []       = .punctuation;
+    }
+    : pattern {
+      regex          \= (\.\^)$${__IDENTIFIER}
+      styles []       = .accessor, .const;
+    }
+    : pattern {
+      regex          \= (\.\^|\.)
+      styles []       = .accessor;
+    }
+    : pattern {
+      regex          \= (\|\||&&|&|\||\+\+|\-\-|\+|\-|==|!=|==|!==|<=|>=|<<|>>>|>>|<|>|/|\*|\*\*|%|~|\^|!)
+      styles []       = .operator;
+    }
+    : include "types" ;
+    : pattern {
+      regex          \= \b$${__CONST_IDENTIFIER}\b
+      styles []       = .const;
+    }
+    : inline_push {
+      regex          \= $${__IDENTIFIER}(\()
+      styles []       = .functionName, .punctuation;
+      : pop {
+        regex       \= (\))
+        styles []    = .punctuation;
+      }
+      : pattern {
+        regex       \= (,)
+        styles []    = .punctuation;
+      }
+      : include "main" ;
+    }
+    : pattern {
+      regex          \= \b$${__TYPE_IDENTIFIER}\b
+      styles []       = .typeName;
+    }
+    : pattern {
+      regex          \= $${__IDENTIFIER}
+      styles []       = .nameIdentifier;
+    }
+    : pattern {
+      regex          \= (=)
+      styles []       = .punctuation;
+    }
+    : inline_push {
+      regex          \= (\{)
+      styles []       = .punctuation;
+      : pop {  
+        regex       \= (\})
+        styles []    = .punctuation;
+      }
+      : include "main" ;
+    }
+    : inline_push {
+      regex          \= (\()
+      styles []       = .punctuation;
+      : pop {
+        regex       \= (\))
+        styles []    = .punctuation;
+      }
+      : pattern {
+        regex       \= (,)
+        styles []    = .punctuation;
+      }
+      : include "main" ;
+    }
+    : include "decorators";
+    : pattern {
+      regex          \= ([^\s])
+      styles []       = .illegal;
+    }
+
+  }
+
+  #################################################
+  ## End of Contexts
+  #################################################
+
+  ###########################################
+  ## Numeric Context
+  ###########################################
+
+  numeric : context {
+    : pattern {
+        regex          \= (-)?(\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)([LlFf])?\b)
+        styles []       = .numeric;
+    }
+  }
+
+  literals : context {
+    : pattern {
+        regex          \= (\"\")
+        styles []       = .string;
+    }
+    : inline_push {
+        regex          \= (\")
+        styles []       = .string;
+        default_style   = .string
+        : pop {
+          regex       \= ([^\\]\")
+          styles []    = .string;
+        }
+    }
+    : include "numeric" ;
+    : pattern {
+        regex          \= (\b(true|false)\b)
+        styles []       = .boolean;
+    }
+  }
+
+  types : context {
+    : pattern {
+        regex          \= ([:|&]\s*)$${__IDENTIFIER}
+        styles []       = .punctuation, .type;
+    }
+    : pattern {
+        regex          \= (\b(?:is|as)\s+)$${__IDENTIFIER}
+        styles []       = .keyword, .type;
+    }
+    : inline_push {
+        regex          \= ([:|&]\s*\()
+        styles []       = .punctuation;
+        : pop {
+          regex       \= (\))
+          styles []    = .punctuation;
+        }
+        : pattern {
+          regex       \= (,)
+          styles []    = .punctuation;
+        }
+        : pattern {
+          regex          \= $${__IDENTIFIER}
+          styles []       = .type;
+        }
+        : include "types" ;
+    }
+  }
+
+  wasm : context {
+    : include "multi_line_comment" ;
+    : pattern {
+        regex          \= (-)?(\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)([LlFf])?\b)
+        styles []       = .numeric;
+    }
+    : pattern {
+        regex          \= \b(i32|i64|f32|f64)\b
+        styles []       = .type;
+    }
+    : pattern {
+        regex          \= (\$)$${__MODULE}$${__IDENTIFIER}
+        styles []       = .module,.module, .nameIdentifier;
+    }
+    : pattern {
+        regex          \= (\$)$${__IDENTIFIER}
+        styles []       = .nameIdentifier;
+    }
+    : pattern {
+        regex          \= (([\w\./]+)\b)
+        styles []       = .string;
+    }
+    : inline_push {
+        regex          \= (\()(?:([\w\./$]+)?\b)
+        styles []       = .punctuation, .modifier;
+        : pop {
+          regex       \= (\))
+          styles []    = .punctuation;
+        }
+        : include "wasm" ;
+    }
+  }
+
+  ###########################################
+  ## Multi Line Comment Context
+  ###########################################
+
+  multi_line_comment : context {
+    description        = multiline
+    : inline_push {
+      regex          \= (/\*)
+      styles []       = .doccomment;
+      default_style   = .doccomment
+      : pop {
+        regex       \= (\*/)
+        styles []    = .doccomment;
+      }
+    }
+    : pattern {
+      regex          \= (//.*)
+      styles []       = .comment;
+    }
+  }
+
+
+  decorators : context {
+    : inline_push {
+      regex          \= (#\[)
+      styles []       = .decorator;
+      : pop {
+        regex       \= (\])
+        styles []    = .decorator;
+      }
+
+      : include "literals";
+
+      : pattern {
+        regex          \= $${__IDENTIFIER}
+        styles []       = .decoratorName;
+      }
+    }
+  }
+}

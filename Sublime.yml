@@ -1,0 +1,371 @@
+%YAML 1.2
+---
+name: lys
+scope: source.lys
+file_extensions: [lys]
+
+contexts:
+  main:
+    - include: multi_line_comment
+    - include: literals
+    - match: '\b(fun)(\s+)(\w+|\|\||&&|&|\||\+\+|\-\-|\+|\-|==|!=|==|!==|<=|>=|<<|>>>|>>|<|>|/|\*|\*\*|%|~|\^)(?:\s*(\()?)'
+      captures:
+        0: storage.type.function.lys.lys
+        1: text.lys
+        2: entity.name.function.lys
+        3: punctuation.lys
+      push:
+        - match: '(\))'
+          pop: true
+          captures:
+            0: punctuation.lys
+        - match: "(,)"
+          captures:
+            0: punctuation.lys
+        - match: '([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+          captures:
+            0: variable.parameter.function.lys
+        - include: types
+        - match: "(.)"
+          captures:
+            0: text.lys
+    - match: '\b(val|var)(\s+)([A-Z][A-Z0-9_]*)'
+      captures:
+        0: storage.type.var.lys
+        1: text.lys
+        2: variable.other.constant.lys
+    - match: '\b(val|var)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+      captures:
+        0: storage.type.var.lys
+        1: text.lys
+        2: entity.name.variable.lys
+    - match: '\b(import)(\s+)((?:[A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*::)+)'
+      captures:
+        0: storage.type.var.lys
+        1: text.lys
+        2: entity.name.type.module.lys
+    - match: '\b(import)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+      captures:
+        0: storage.type.var.lys
+        1: text.lys
+        2: entity.name.type.module.lys
+    - match: '\b(impl)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+      captures:
+        0: storage.type.type.lys.lys
+        1: text.lys
+        2: entity.name.class.lys
+    - match: '\b(type)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+      captures:
+        0: storage.type.type.lys.lys
+        1: text.lys
+        2: entity.name.class.lys
+    - match: '\b(enum)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)(?:\s+(\{)?)'
+      captures:
+        0: storage.type.type.lys.lys
+        1: text.lys
+        2: entity.name.class.lys
+        3: punctuation.lys
+      push:
+        - match: '(\})'
+          pop: true
+          captures:
+            0: punctuation.lys
+        - match: '([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)(\s*\()'
+          captures:
+            0: entity.name.class.lys
+            1: punctuation.lys
+          push:
+            - match: '(\))'
+              pop: true
+              captures:
+                0: punctuation.lys
+            - match: "(,)"
+              captures:
+                0: punctuation.lys
+            - match: '([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+              captures:
+                0: variable.parameter.function.lys
+            - include: types
+            - match: "(.)"
+              captures:
+                0: text.lys
+        - match: '([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+          captures:
+            0: entity.name.class.lys
+        - match: "(.)"
+          captures:
+            0: text.lys
+    - match: '(%wasm)(\s*)(\{)'
+      captures:
+        0: storage.modifier.lys
+        1: text.lys
+        2: punctuation.lys
+      push:
+        - match: '(\})'
+          pop: true
+          captures:
+            0: punctuation.lys
+        - include: wasm
+        - match: "(.)"
+          captures:
+            0: text.lys
+    - match: '(%injected)\b'
+      captures:
+        0: storage.type.type.lys.lys
+    - match: '(%stack)(\s*)(\{)'
+      captures:
+        0: storage.modifier.lys
+        1: text.lys
+        2: punctuation.lys
+      push:
+        - match: '(\})'
+          pop: true
+          captures:
+            0: punctuation.lys
+        - match: '([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+          captures:
+            0: variable.other.constant.lys
+        - match: "(=)"
+          captures:
+            0: punctuation.lys
+        - include: literals
+        - match: "(.)"
+          captures:
+            0: text.lys
+    - match: '\b(struct)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)(?:\s*(\()?)'
+      captures:
+        0: storage.type.type.lys.lys
+        1: text.lys
+        2: entity.name.class.lys
+        3: punctuation.lys
+      push:
+        - match: '(\))'
+          pop: true
+          captures:
+            0: punctuation.lys
+        - match: "(,)"
+          captures:
+            0: punctuation.lys
+        - match: '([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+          captures:
+            0: variable.parameter.function.lys
+        - include: types
+        - match: "(.)"
+          captures:
+            0: text.lys
+    - match: '\b(if|match|case|fun|else|loop|continue|break)\b'
+      captures:
+        0: keyword.lys
+    - match: '(?:%inline|%struct|\b(private))'
+      captures:
+        0: storage.modifier.lys
+    - match: '((?:[A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*::)+)'
+      captures:
+        0: entity.name.type.module.lys
+    - match: '(\->)'
+      captures:
+        0: punctuation.lys
+    - match: '(\.\^)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+      captures:
+        0: punctuation.accessor.lys
+        1: variable.other.constant.lys
+    - match: '(\.\^|\.)'
+      captures:
+        0: punctuation.accessor.lys
+    - match: '(\|\||&&|&|\||\+\+|\-\-|\+|\-|==|!=|==|!==|<=|>=|<<|>>>|>>|<|>|/|\*|\*\*|%|~|\^|!)'
+      captures:
+        0: keyword.operator.lys
+    - include: types
+    - match: '\b([A-Z][A-Z0-9_]*)\b'
+      captures:
+        0: variable.other.constant.lys
+    - match: '([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)(\()'
+      captures:
+        0: entity.name.function.lys
+        1: punctuation.lys
+      push:
+        - match: '(\))'
+          pop: true
+          captures:
+            0: punctuation.lys
+        - match: "(,)"
+          captures:
+            0: punctuation.lys
+        - include: main
+        - match: "(.)"
+          captures:
+            0: text.lys
+    - match: '\b([A-Z][A-Za-z0-9\x{0024}_]*)\b'
+      captures:
+        0: variable.other.object.lys
+    - match: '([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+      captures:
+        0: variable.other.readwrite.ts.lys
+    - match: "(=)"
+      captures:
+        0: punctuation.lys
+    - match: '(\{)'
+      captures:
+        0: punctuation.lys
+      push:
+        - match: '(\})'
+          pop: true
+          captures:
+            0: punctuation.lys
+        - include: main
+        - match: "(.)"
+          captures:
+            0: text.lys
+    - match: '(\()'
+      captures:
+        0: punctuation.lys
+      push:
+        - match: '(\))'
+          pop: true
+          captures:
+            0: punctuation.lys
+        - match: "(,)"
+          captures:
+            0: punctuation.lys
+        - include: main
+        - match: "(.)"
+          captures:
+            0: text.lys
+    - include: decorators
+    - match: '([^\s])'
+      captures:
+        0: invalid.lys
+    - match: "(.)"
+      captures:
+        0: text.lys
+  numeric:
+    - match: '(-)?(\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)([LlFf])?\b)'
+      captures:
+        0: constant.numeric.lys
+    - match: "(.)"
+      captures:
+        0: text.lys
+  literals:
+    - match: '(\"\")'
+      captures:
+        0: string.lys
+    - match: '(\")'
+      captures:
+        0: string.lys
+      push:
+        - match: '([^\x{005c}]\")'
+          pop: true
+          captures:
+            0: string.lys
+        - match: "(.)"
+          captures:
+            0: string.lys
+    - include: numeric
+    - match: '(\b(true|false)\b)'
+      captures:
+        0: constant.language.lys
+    - match: "(.)"
+      captures:
+        0: text.lys
+  types:
+    - match: '([\x{003a}\x{007c}\x{0026}]\s*)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+      captures:
+        0: punctuation.lys
+        1: support.type.lys
+    - match: '(\b(?:is|as)\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+      captures:
+        0: keyword.lys
+        1: support.type.lys
+    - match: '([\x{003a}\x{007c}\x{0026}]\s*\()'
+      captures:
+        0: punctuation.lys
+      push:
+        - match: '(\))'
+          pop: true
+          captures:
+            0: punctuation.lys
+        - match: "(,)"
+          captures:
+            0: punctuation.lys
+        - match: '([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+          captures:
+            0: support.type.lys
+        - include: types
+        - match: "(.)"
+          captures:
+            0: text.lys
+    - match: "(.)"
+      captures:
+        0: text.lys
+  wasm:
+    - include: multi_line_comment
+    - match: '(-)?(\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\.?[0-9]*)|(\.[0-9]+))((e|E)(\+|-)?[0-9]+)?)([LlFf])?\b)'
+      captures:
+        0: constant.numeric.lys
+    - match: '\b(i32|i64|f32|f64)\b'
+      captures:
+        0: support.type.lys
+    - match: '(\$)((?:[A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*::)+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+      captures:
+        0: entity.name.type.module.lys
+        1: entity.name.type.module.lys
+        2: variable.other.readwrite.ts.lys
+    - match: '(\$)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+      captures:
+        0: variable.other.readwrite.ts.lys
+    - match: '(([\w\.\x{002f}]+)\b)'
+      captures:
+        0: string.lys
+    - match: '(\()(?:([\w\.\x{002f}\x{0024}]+)?\b)'
+      captures:
+        0: punctuation.lys
+        1: storage.modifier.lys
+      push:
+        - match: '(\))'
+          pop: true
+          captures:
+            0: punctuation.lys
+        - include: wasm
+        - match: "(.)"
+          captures:
+            0: text.lys
+    - match: "(.)"
+      captures:
+        0: text.lys
+  multi_line_comment:
+    - match: '(/\*)'
+      captures:
+        0: comment.block.documentation.lys
+      push:
+        - match: '(\*/)'
+          pop: true
+          captures:
+            0: comment.block.documentation.lys
+        - match: "(.)"
+          captures:
+            0: comment.block.documentation.lys
+    - match: "(//.*)"
+      captures:
+        0: comment.lys
+    - match: "(.)"
+      captures:
+        0: text.lys
+  decorators:
+    - match: '(#\[)'
+      captures:
+        0: comment.block.preprocessor.lys
+      push:
+        - match: '(\])'
+          pop: true
+          captures:
+            0: comment.block.preprocessor.lys
+        - include: literals
+        - match: '([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)'
+          captures:
+            0: entity.other.attribute-name.lys
+        - match: "(.)"
+          captures:
+            0: text.lys
+    - match: "(.)"
+      captures:
+        0: text.lys

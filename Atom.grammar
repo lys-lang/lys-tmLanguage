@@ -1,0 +1,721 @@
+'fileTypes' : [
+  'lys'
+]
+'name' : 'lys'
+'patterns' : [
+  {
+    'include' : '#main'
+  }
+]
+'scopeName' : 'source.lys'
+'uuid' : ''
+'repository' : {
+  'main' : {
+    'patterns' : [
+      {
+        'include' : '#multi_line_comment'
+      }
+      {
+        'include' : '#literals'
+      }
+      {
+        'begin' : '\\b(fun)(\\s+)(\\w+|\\|\\||&&|&|\\||\\+\\+|\\-\\-|\\+|\\-|==|!=|==|!==|<=|>=|<<|>>>|>>|<|>|/|\\*|\\*\\*|%|~|\\^)(?:\\s*(\\()?)'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'storage.type.function.lys.lys'
+          }
+          '2' : {
+            'name' : 'text.lys'
+          }
+          '3' : {
+            'name' : 'entity.name.function.lys'
+          }
+          '4' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+        'patterns' : [
+          {
+            'include' : '#main__1'
+          }
+        ]
+        'end' : '(\\))'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+      }
+      {
+        'match' : '\\b(val|var)(\\s+)([A-Z][A-Z0-9_]*)'
+        'captures' : {
+          '1' : {
+            'name' : 'storage.type.var.lys'
+          }
+          '2' : {
+            'name' : 'text.lys'
+          }
+          '3' : {
+            'name' : 'variable.other.constant.lys'
+          }
+        }
+      }
+      {
+        'match' : '\\b(val|var)(\\s+)([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'captures' : {
+          '1' : {
+            'name' : 'storage.type.var.lys'
+          }
+          '2' : {
+            'name' : 'text.lys'
+          }
+          '3' : {
+            'name' : 'entity.name.variable.lys'
+          }
+        }
+      }
+      {
+        'match' : '\\b(import)(\\s+)((?:[A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*::)+)'
+        'captures' : {
+          '1' : {
+            'name' : 'storage.type.var.lys'
+          }
+          '2' : {
+            'name' : 'text.lys'
+          }
+          '3' : {
+            'name' : 'entity.name.type.module.lys'
+          }
+        }
+      }
+      {
+        'match' : '\\b(import)(\\s+)([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'captures' : {
+          '1' : {
+            'name' : 'storage.type.var.lys'
+          }
+          '2' : {
+            'name' : 'text.lys'
+          }
+          '3' : {
+            'name' : 'entity.name.type.module.lys'
+          }
+        }
+      }
+      {
+        'match' : '\\b(impl)(\\s+)([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'captures' : {
+          '1' : {
+            'name' : 'storage.type.type.lys.lys'
+          }
+          '2' : {
+            'name' : 'text.lys'
+          }
+          '3' : {
+            'name' : 'entity.name.class.lys'
+          }
+        }
+      }
+      {
+        'match' : '\\b(type)(\\s+)([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'captures' : {
+          '1' : {
+            'name' : 'storage.type.type.lys.lys'
+          }
+          '2' : {
+            'name' : 'text.lys'
+          }
+          '3' : {
+            'name' : 'entity.name.class.lys'
+          }
+        }
+      }
+      {
+        'begin' : '\\b(enum)(\\s+)([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)(?:\\s+(\\{)?)'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'storage.type.type.lys.lys'
+          }
+          '2' : {
+            'name' : 'text.lys'
+          }
+          '3' : {
+            'name' : 'entity.name.class.lys'
+          }
+          '4' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+        'patterns' : [
+          {
+            'include' : '#main__2'
+          }
+        ]
+        'end' : '(\\})'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+      }
+      {
+        'begin' : '(%wasm)(\\s*)(\\{)'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'storage.modifier.lys'
+          }
+          '2' : {
+            'name' : 'text.lys'
+          }
+          '3' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+        'patterns' : [
+          {
+            'include' : '#main__4'
+          }
+        ]
+        'end' : '(\\})'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+      }
+      {
+        'match' : '(%injected)\\b'
+        'name' : 'storage.type.type.lys.lys'
+      }
+      {
+        'begin' : '(%stack)(\\s*)(\\{)'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'storage.modifier.lys'
+          }
+          '2' : {
+            'name' : 'text.lys'
+          }
+          '3' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+        'patterns' : [
+          {
+            'include' : '#main__5'
+          }
+        ]
+        'end' : '(\\})'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+      }
+      {
+        'begin' : '\\b(struct)(\\s+)([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)(?:\\s*(\\()?)'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'storage.type.type.lys.lys'
+          }
+          '2' : {
+            'name' : 'text.lys'
+          }
+          '3' : {
+            'name' : 'entity.name.class.lys'
+          }
+          '4' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+        'patterns' : [
+          {
+            'include' : '#main__6'
+          }
+        ]
+        'end' : '(\\))'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+      }
+      {
+        'match' : '\\b(if|match|case|fun|else|loop|continue|break)\\b'
+        'name' : 'keyword.lys'
+      }
+      {
+        'match' : '(?:%inline|%struct|\\b(private))'
+        'name' : 'storage.modifier.lys'
+      }
+      {
+        'match' : '((?:[A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*::)+)'
+        'name' : 'entity.name.type.module.lys'
+      }
+      {
+        'match' : '(\\->)'
+        'name' : 'punctuation.lys'
+      }
+      {
+        'match' : '(\\.\\^)([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'captures' : {
+          '1' : {
+            'name' : 'punctuation.accessor.lys'
+          }
+          '2' : {
+            'name' : 'variable.other.constant.lys'
+          }
+        }
+      }
+      {
+        'match' : '(\\.\\^|\\.)'
+        'name' : 'punctuation.accessor.lys'
+      }
+      {
+        'match' : '(\\|\\||&&|&|\\||\\+\\+|\\-\\-|\\+|\\-|==|!=|==|!==|<=|>=|<<|>>>|>>|<|>|/|\\*|\\*\\*|%|~|\\^|!)'
+        'name' : 'keyword.operator.lys'
+      }
+      {
+        'include' : '#types'
+      }
+      {
+        'match' : '\\b([A-Z][A-Z0-9_]*)\\b'
+        'name' : 'variable.other.constant.lys'
+      }
+      {
+        'begin' : '([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)(\\()'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'entity.name.function.lys'
+          }
+          '2' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+        'patterns' : [
+          {
+            'include' : '#main__7'
+          }
+        ]
+        'end' : '(\\))'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+      }
+      {
+        'match' : '\\b([A-Z][A-Za-z0-9\\x{0024}_]*)\\b'
+        'name' : 'variable.other.object.lys'
+      }
+      {
+        'match' : '([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'name' : 'variable.other.readwrite.ts.lys'
+      }
+      {
+        'match' : '(=)'
+        'name' : 'punctuation.lys'
+      }
+      {
+        'begin' : '(\\{)'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+        'patterns' : [
+          {
+            'include' : '#main__8'
+          }
+        ]
+        'end' : '(\\})'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+      }
+      {
+        'begin' : '(\\()'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+        'patterns' : [
+          {
+            'include' : '#main__9'
+          }
+        ]
+        'end' : '(\\))'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+      }
+      {
+        'include' : '#decorators'
+      }
+      {
+        'match' : '([^\\s])'
+        'name' : 'invalid.lys'
+      }
+    ]
+  }
+  'decorators' : {
+    'patterns' : [
+      {
+        'begin' : '(#\\[)'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'comment.block.preprocessor.lys'
+          }
+        }
+        'patterns' : [
+          {
+            'include' : '#decorators__1'
+          }
+        ]
+        'end' : '(\\])'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'comment.block.preprocessor.lys'
+          }
+        }
+      }
+    ]
+  }
+  'decorators__1' : {
+    'patterns' : [
+      {
+        'include' : '#literals'
+      }
+      {
+        'match' : '([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'name' : 'entity.other.attribute-name.lys'
+      }
+    ]
+  }
+  'literals' : {
+    'patterns' : [
+      {
+        'match' : '(\\"\\")'
+        'name' : 'string.lys'
+      }
+      {
+        'begin' : '(\\")'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'string.lys'
+          }
+        }
+        'contentName' : 'string.lys'
+        'end' : '([^\\x{005c}]\\")'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'string.lys'
+          }
+        }
+      }
+      {
+        'include' : '#numeric'
+      }
+      {
+        'match' : '(\\b(true|false)\\b)'
+        'name' : 'constant.language.lys'
+      }
+    ]
+  }
+  'literals__1' : {
+    'patterns' : [
+    ]
+  }
+  'main__1' : {
+    'patterns' : [
+      {
+        'match' : '(,)'
+        'name' : 'punctuation.lys'
+      }
+      {
+        'match' : '([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'name' : 'variable.parameter.function.lys'
+      }
+      {
+        'include' : '#types'
+      }
+    ]
+  }
+  'main__2' : {
+    'patterns' : [
+      {
+        'begin' : '([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)(\\s*\\()'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'entity.name.class.lys'
+          }
+          '2' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+        'patterns' : [
+          {
+            'include' : '#main__3'
+          }
+        ]
+        'end' : '(\\))'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+      }
+      {
+        'match' : '([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'name' : 'entity.name.class.lys'
+      }
+    ]
+  }
+  'main__3' : {
+    'patterns' : [
+      {
+        'match' : '(,)'
+        'name' : 'punctuation.lys'
+      }
+      {
+        'match' : '([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'name' : 'variable.parameter.function.lys'
+      }
+      {
+        'include' : '#types'
+      }
+    ]
+  }
+  'main__4' : {
+    'patterns' : [
+      {
+        'include' : '#wasm'
+      }
+    ]
+  }
+  'main__5' : {
+    'patterns' : [
+      {
+        'match' : '([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'name' : 'variable.other.constant.lys'
+      }
+      {
+        'match' : '(=)'
+        'name' : 'punctuation.lys'
+      }
+      {
+        'include' : '#literals'
+      }
+    ]
+  }
+  'main__6' : {
+    'patterns' : [
+      {
+        'match' : '(,)'
+        'name' : 'punctuation.lys'
+      }
+      {
+        'match' : '([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'name' : 'variable.parameter.function.lys'
+      }
+      {
+        'include' : '#types'
+      }
+    ]
+  }
+  'main__7' : {
+    'patterns' : [
+      {
+        'match' : '(,)'
+        'name' : 'punctuation.lys'
+      }
+      {
+        'include' : '#main'
+      }
+    ]
+  }
+  'main__8' : {
+    'patterns' : [
+      {
+        'include' : '#main'
+      }
+    ]
+  }
+  'main__9' : {
+    'patterns' : [
+      {
+        'match' : '(,)'
+        'name' : 'punctuation.lys'
+      }
+      {
+        'include' : '#main'
+      }
+    ]
+  }
+  'multi_line_comment' : {
+    'patterns' : [
+      {
+        'begin' : '(/\\*)'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'comment.block.documentation.lys'
+          }
+        }
+        'contentName' : 'comment.block.documentation.lys'
+        'end' : '(\\*/)'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'comment.block.documentation.lys'
+          }
+        }
+      }
+      {
+        'match' : '(//.*)'
+        'name' : 'comment.lys'
+      }
+    ]
+  }
+  'multi_line_comment__1' : {
+    'patterns' : [
+    ]
+  }
+  'numeric' : {
+    'patterns' : [
+      {
+        'match' : '(-)?(\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)([LlFf])?\\b)'
+        'name' : 'constant.numeric.lys'
+      }
+    ]
+  }
+  'types' : {
+    'patterns' : [
+      {
+        'match' : '([\\x{003a}\\x{007c}\\x{0026}]\\s*)([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'captures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+          '2' : {
+            'name' : 'support.type.lys'
+          }
+        }
+      }
+      {
+        'match' : '(\\b(?:is|as)\\s+)([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'captures' : {
+          '1' : {
+            'name' : 'keyword.lys'
+          }
+          '2' : {
+            'name' : 'support.type.lys'
+          }
+        }
+      }
+      {
+        'begin' : '([\\x{003a}\\x{007c}\\x{0026}]\\s*\\()'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+        'patterns' : [
+          {
+            'include' : '#types__1'
+          }
+        ]
+        'end' : '(\\))'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+      }
+    ]
+  }
+  'types__1' : {
+    'patterns' : [
+      {
+        'match' : '(,)'
+        'name' : 'punctuation.lys'
+      }
+      {
+        'match' : '([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'name' : 'support.type.lys'
+      }
+      {
+        'include' : '#types'
+      }
+    ]
+  }
+  'wasm' : {
+    'patterns' : [
+      {
+        'include' : '#multi_line_comment'
+      }
+      {
+        'match' : '(-)?(\\b((0(x|X)[0-9a-fA-F]*)|(([0-9]+\\.?[0-9]*)|(\\.[0-9]+))((e|E)(\\+|-)?[0-9]+)?)([LlFf])?\\b)'
+        'name' : 'constant.numeric.lys'
+      }
+      {
+        'match' : '\\b(i32|i64|f32|f64)\\b'
+        'name' : 'support.type.lys'
+      }
+      {
+        'match' : '(\\$)((?:[A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*::)+)([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'captures' : {
+          '1' : {
+            'name' : 'entity.name.type.module.lys'
+          }
+          '2' : {
+            'name' : 'entity.name.type.module.lys'
+          }
+          '3' : {
+            'name' : 'variable.other.readwrite.ts.lys'
+          }
+        }
+      }
+      {
+        'match' : '(\\$)([A-Za-z\\x{0024}_][A-Za-z0-9\\x{0024}_]*)'
+        'name' : 'variable.other.readwrite.ts.lys'
+      }
+      {
+        'match' : '(([\\w\\.\\x{002f}]+)\\b)'
+        'name' : 'string.lys'
+      }
+      {
+        'begin' : '(\\()(?:([\\w\\.\\x{002f}\\x{0024}]+)?\\b)'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+          '2' : {
+            'name' : 'storage.modifier.lys'
+          }
+        }
+        'patterns' : [
+          {
+            'include' : '#wasm__1'
+          }
+        ]
+        'end' : '(\\))'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+      }
+    ]
+  }
+  'wasm__1' : {
+    'patterns' : [
+      {
+        'include' : '#wasm'
+      }
+    ]
+  }
+}

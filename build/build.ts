@@ -1,7 +1,7 @@
-import fs = require('fs');
-import path = require('path');
-import yaml = require('js-yaml');
-import plist = require('plist');
+import fs = require("fs");
+import path = require("path");
+import yaml = require("js-yaml");
+import plist = require("plist");
 
 function writePlistFile(grammar: any, fileName: string) {
   const text = plist.build(grammar);
@@ -13,12 +13,12 @@ function readYaml(fileName: string) {
   return yaml.safeLoad(text);
 }
 
-function buildGrammar() {
-  const tsGrammar = readYaml("../Lys.YAML-tmLanguage");
+// function buildGrammar() {
+//   const tsGrammar = readYaml("../Lys.YAML-tmLanguage");
 
-  // Write TypeScript.tmLanguage
-  writePlistFile(tsGrammar, "../Lys.tmLanguage");
-}
+//   // Write TypeScript.tmLanguage
+//   writePlistFile(tsGrammar, "../Lys.tmLanguage");
+// }
 
 // function buildTheme() {
 //   const tsTheme = readYaml("../Lys.YAML-tmTheme");
@@ -27,5 +27,5 @@ function buildGrammar() {
 //   writePlistFile(tsTheme, "../Lys.tmTheme");
 // }
 
-buildGrammar();
+// buildGrammar();
 // buildTheme();
