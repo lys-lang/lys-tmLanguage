@@ -1,4 +1,4 @@
-Copyright (c) Mulesoft inc
+Copyright (c) Lys Contributors
 All rights reserved.
 
 MIT License
