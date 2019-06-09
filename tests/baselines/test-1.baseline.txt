@@ -1,0 +1,370 @@
+original file
+-----------------------------------
+var a = fds[1]
+ 
+type test = %struct asd
+
+#![no-std]
+
+#[inline]
+fun test(): a = 1
+
+type test = %structasd
+
+privateasd = 1
+
+fun []() : a = 1 ++++> 1
+
+var x = ???
+
+fun asd(a: i32 /* x */, /*asd*/ b:  f31): i32 = 1
+
+struct testStruct(a: i32 /* x */, /*asd*/ b:  f31)
+
+enum A {
+  B(a: i32 /* x */, /*asd*/ b:  f31)
+}
+-----------------------------------
+
+Grammar: Lys.tmLanguage
+-----------------------------------
+>var a = fds[1]
+ ^^^
+ source.lys storage.type.var.lys
+    ^
+    source.lys text.lys
+     ^
+     source.lys entity.name.variable.lys
+      ^
+      source.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys
+         ^^^
+         source.lys variable.other.readwrite.ts.lys
+            ^
+            source.lys punctuation.lys
+             ^
+             source.lys constant.numeric.lys
+              ^
+              source.lys punctuation.lys
+> 
+ ^^
+ source.lys
+>type test = %struct asd
+ ^^^^
+ source.lys storage.type.type.lys.lys
+     ^
+     source.lys text.lys
+      ^^^^
+      source.lys entity.name.class.lys
+          ^
+          source.lys
+           ^
+           source.lys punctuation.lys
+            ^
+            source.lys
+             ^^^^^^^
+             source.lys storage.modifier.lys
+                    ^
+                    source.lys
+                     ^^^
+                     source.lys variable.other.readwrite.ts.lys
+>
+ ^
+ source.lys
+>#![no-std]
+ ^^^
+ source.lys punctuation.lys
+    ^^
+    source.lys entity.other.attribute-name.lys
+      ^
+      source.lys
+       ^^^
+       source.lys entity.other.attribute-name.lys
+          ^
+          source.lys punctuation.lys
+>
+ ^
+ source.lys
+>#[inline]
+ ^^
+ source.lys punctuation.lys
+   ^^^^^^
+   source.lys entity.other.attribute-name.lys
+         ^
+         source.lys punctuation.lys
+>fun test(): a = 1
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^^^
+     source.lys entity.name.function.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys punctuation.lys
+           ^^
+           source.lys punctuation.lys
+             ^
+             source.lys support.type.lys
+              ^
+              source.lys
+               ^
+               source.lys punctuation.lys
+                ^
+                source.lys
+                 ^
+                 source.lys constant.numeric.lys
+>
+ ^
+ source.lys
+>type test = %structasd
+ ^^^^
+ source.lys storage.type.type.lys.lys
+     ^
+     source.lys text.lys
+      ^^^^
+      source.lys entity.name.class.lys
+          ^
+          source.lys
+           ^
+           source.lys punctuation.lys
+            ^
+            source.lys
+             ^
+             source.lys keyword.operator.lys
+              ^^^^^^^^^
+              source.lys variable.other.readwrite.ts.lys
+>
+ ^
+ source.lys
+>privateasd = 1
+ ^^^^^^^^^^
+ source.lys variable.other.readwrite.ts.lys
+           ^
+           source.lys
+            ^
+            source.lys punctuation.lys
+             ^
+             source.lys
+              ^
+              source.lys constant.numeric.lys
+>
+ ^
+ source.lys
+>fun []() : a = 1 ++++> 1
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^
+     source.lys entity.name.function.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys punctuation.lys
+         ^
+         source.lys
+          ^^
+          source.lys punctuation.lys
+            ^
+            source.lys support.type.lys
+             ^
+             source.lys
+              ^
+              source.lys punctuation.lys
+               ^
+               source.lys
+                ^
+                source.lys constant.numeric.lys
+                 ^
+                 source.lys
+                  ^^^^^
+                  source.lys keyword.operator.lys
+                       ^
+                       source.lys
+                        ^
+                        source.lys constant.numeric.lys
+>
+ ^
+ source.lys
+>var x = ???
+ ^^^
+ source.lys storage.type.var.lys
+    ^
+    source.lys text.lys
+     ^
+     source.lys entity.name.variable.lys
+      ^
+      source.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys
+         ^^^
+         source.lys variable.other.readwrite.ts.lys
+>
+ ^
+ source.lys
+>fun asd(a: i32 /* x */, /*asd*/ b:  f31): i32 = 1
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^^
+     source.lys entity.name.function.lys
+        ^
+        source.lys punctuation.lys
+         ^
+         source.lys variable.parameter.function.lys
+          ^^
+          source.lys punctuation.lys
+            ^^^
+            source.lys support.type.lys
+               ^
+               source.lys
+                ^^
+                source.lys comment.block.documentation.lys
+                  ^^^
+                  source.lys comment.block.documentation.lys
+                     ^^
+                     source.lys comment.block.documentation.lys
+                       ^
+                       source.lys punctuation.lys
+                        ^
+                        source.lys
+                         ^^
+                         source.lys comment.block.documentation.lys
+                           ^^^
+                           source.lys comment.block.documentation.lys
+                              ^^
+                              source.lys comment.block.documentation.lys
+                                ^
+                                source.lys
+                                 ^
+                                 source.lys variable.parameter.function.lys
+                                  ^^^
+                                  source.lys punctuation.lys
+                                     ^^^
+                                     source.lys support.type.lys
+                                        ^
+                                        source.lys punctuation.lys
+                                         ^^
+                                         source.lys punctuation.lys
+                                           ^^^
+                                           source.lys support.type.lys
+                                              ^
+                                              source.lys
+                                               ^
+                                               source.lys punctuation.lys
+                                                ^
+                                                source.lys
+                                                 ^
+                                                 source.lys constant.numeric.lys
+>
+ ^
+ source.lys
+>struct testStruct(a: i32 /* x */, /*asd*/ b:  f31)
+ ^^^^^^
+ source.lys storage.type.type.lys.lys
+       ^
+       source.lys text.lys
+        ^^^^^^^^^^
+        source.lys entity.name.class.lys
+                  ^
+                  source.lys punctuation.lys
+                   ^
+                   source.lys variable.parameter.function.lys
+                    ^^
+                    source.lys punctuation.lys
+                      ^^^
+                      source.lys support.type.lys
+                         ^
+                         source.lys
+                          ^^
+                          source.lys comment.block.documentation.lys
+                            ^^^
+                            source.lys comment.block.documentation.lys
+                               ^^
+                               source.lys comment.block.documentation.lys
+                                 ^
+                                 source.lys punctuation.lys
+                                  ^
+                                  source.lys
+                                   ^^
+                                   source.lys comment.block.documentation.lys
+                                     ^^^
+                                     source.lys comment.block.documentation.lys
+                                        ^^
+                                        source.lys comment.block.documentation.lys
+                                          ^
+                                          source.lys
+                                           ^
+                                           source.lys variable.parameter.function.lys
+                                            ^^^
+                                            source.lys punctuation.lys
+                                               ^^^
+                                               source.lys support.type.lys
+                                                  ^
+                                                  source.lys punctuation.lys
+>
+ ^
+ source.lys
+>enum A {
+ ^^^^
+ source.lys storage.type.type.lys.lys
+     ^
+     source.lys text.lys
+      ^
+      source.lys entity.name.class.lys
+       ^
+       source.lys
+        ^
+        source.lys punctuation.lys
+>  B(a: i32 /* x */, /*asd*/ b:  f31)
+ ^^
+ source.lys
+   ^
+   source.lys entity.name.class.lys
+    ^
+    source.lys punctuation.lys
+     ^
+     source.lys variable.parameter.function.lys
+      ^^
+      source.lys punctuation.lys
+        ^^^
+        source.lys support.type.lys
+           ^
+           source.lys
+            ^^
+            source.lys comment.block.documentation.lys
+              ^^^
+              source.lys comment.block.documentation.lys
+                 ^^
+                 source.lys comment.block.documentation.lys
+                   ^
+                   source.lys punctuation.lys
+                    ^
+                    source.lys
+                     ^^
+                     source.lys comment.block.documentation.lys
+                       ^^^
+                       source.lys comment.block.documentation.lys
+                          ^^
+                          source.lys comment.block.documentation.lys
+                            ^
+                            source.lys
+                             ^
+                             source.lys variable.parameter.function.lys
+                              ^^^
+                              source.lys punctuation.lys
+                                 ^^^
+                                 source.lys support.type.lys
+                                    ^
+                                    source.lys punctuation.lys
+>}
+ ^
+ source.lys punctuation.lys

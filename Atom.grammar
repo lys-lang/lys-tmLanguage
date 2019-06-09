@@ -245,7 +245,7 @@
         'name' : 'keyword.lys'
       }
       {
-        'match' : '(?:%inline|%struct|\\b(private))'
+        'match' : '(?:%inline|%struct|\\b(private))\\b'
         'name' : 'storage.modifier.lys'
       }
       {
@@ -336,7 +336,7 @@
         }
       }
       {
-        'begin' : '(\\()'
+        'begin' : '(\\[)'
         'beginCaptures' : {
           '1' : {
             'name' : 'punctuation.lys'
@@ -345,6 +345,25 @@
         'patterns' : [
           {
             'include' : '#main__9'
+          }
+        ]
+        'end' : '(\\])'
+        'endCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+      }
+      {
+        'begin' : '(\\()'
+        'beginCaptures' : {
+          '1' : {
+            'name' : 'punctuation.lys'
+          }
+        }
+        'patterns' : [
+          {
+            'include' : '#main__10'
           }
         ]
         'end' : '(\\))'
@@ -369,7 +388,7 @@
         'begin' : '(#\\[)'
         'beginCaptures' : {
           '1' : {
-            'name' : 'comment.block.preprocessor.lys'
+            'name' : 'punctuation.lys'
           }
         }
         'patterns' : [
@@ -380,7 +399,7 @@
         'end' : '(\\])'
         'endCaptures' : {
           '1' : {
-            'name' : 'comment.block.preprocessor.lys'
+            'name' : 'punctuation.lys'
           }
         }
       }
@@ -443,6 +462,17 @@
       }
       {
         'include' : '#types'
+      }
+    ]
+  }
+  'main__10' : {
+    'patterns' : [
+      {
+        'match' : '(,)'
+        'name' : 'punctuation.lys'
+      }
+      {
+        'include' : '#main'
       }
     ]
   }
@@ -548,10 +578,6 @@
   }
   'main__9' : {
     'patterns' : [
-      {
-        'match' : '(,)'
-        'name' : 'punctuation.lys'
-      }
       {
         'include' : '#main'
       }

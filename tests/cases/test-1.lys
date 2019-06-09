@@ -1,0 +1,24 @@
+var a = fds[1]
+ 
+type test = %struct asd
+
+#![no-std]
+
+#[inline]
+fun test(): a = 1
+
+type test = %structasd
+
+privateasd = 1
+
+fun []() : a = 1 ++++> 1
+
+var x = ???
+
+fun asd(a: i32 /* x */, /*asd*/ b:  f31): i32 = 1
+
+struct testStruct(a: i32 /* x */, /*asd*/ b:  f31)
+
+enum A {
+  B(a: i32 /* x */, /*asd*/ b:  f31)
+}

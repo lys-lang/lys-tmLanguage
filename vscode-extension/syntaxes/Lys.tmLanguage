@@ -36,7 +36,7 @@
         </dict>
         <dict>
           <key>begin</key>
-          <string>\b(fun)(\s+)(\w+|\|\||&amp;&amp;|&amp;|\||\+\+|\-\-|\+|\-|==|!=|==|!==|&lt;=|&gt;=|&lt;&lt;|&gt;&gt;&gt;|&gt;&gt;|&lt;|&gt;|/|\*|\*\*|%|~|\^)(?:\s*(\()?)</string>
+          <string>\b(fun)(\s+)(\w+|\|\||&amp;&amp;|&amp;|\||\+\+|\-\-|\+|\-|==|!=|==|!==|&lt;=|&gt;=|&lt;&lt;|&gt;&gt;&gt;|&gt;&gt;|&lt;|&gt;|/|\*|\*\*|%|~|\^|\[\])(?:\s*(\()?)</string>
           <key>beginCaptures</key>
           <dict>
             <key>1</key>
@@ -79,9 +79,9 @@
           </dict>
         </dict>
         <dict>
-          <key>match</key>
+          <key>begin</key>
           <string>\b(val|var)(\s+)([A-Z][A-Z0-9_]*)</string>
-          <key>captures</key>
+          <key>beginCaptures</key>
           <dict>
             <key>1</key>
             <dict>
@@ -99,11 +99,28 @@
               <string>variable.other.constant.lys</string>
             </dict>
           </dict>
+          <key>patterns</key>
+          <array> 
+            <dict>
+              <key>include</key>
+              <string>#main__2</string>
+            </dict>
+           </array>
+          <key>end</key>
+          <string>(\=)</string>
+          <key>endCaptures</key>
+          <dict>
+            <key>1</key>
+            <dict>
+              <key>name</key>
+              <string>punctuation.lys</string>
+            </dict>
+          </dict>
         </dict>
         <dict>
-          <key>match</key>
-          <string>\b(val|var)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
-          <key>captures</key>
+          <key>begin</key>
+          <string>\b(val|var)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
+          <key>beginCaptures</key>
           <dict>
             <key>1</key>
             <dict>
@@ -119,6 +136,23 @@
             <dict>
               <key>name</key>
               <string>entity.name.variable.lys</string>
+            </dict>
+          </dict>
+          <key>patterns</key>
+          <array> 
+            <dict>
+              <key>include</key>
+              <string>#main__3</string>
+            </dict>
+           </array>
+          <key>end</key>
+          <string>(\=)</string>
+          <key>endCaptures</key>
+          <dict>
+            <key>1</key>
+            <dict>
+              <key>name</key>
+              <string>punctuation.lys</string>
             </dict>
           </dict>
         </dict>
@@ -146,7 +180,7 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>\b(import)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>\b(import)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>captures</key>
           <dict>
             <key>1</key>
@@ -168,7 +202,7 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>\b(impl)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>\b(impl)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>captures</key>
           <dict>
             <key>1</key>
@@ -190,7 +224,7 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>\b(type)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>\b(type)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>captures</key>
           <dict>
             <key>1</key>
@@ -212,7 +246,7 @@
         </dict>
         <dict>
           <key>begin</key>
-          <string>\b(enum)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)(?:\s+(\{)?)</string>
+          <string>\b(enum)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)(?:\s+(\{)?)</string>
           <key>beginCaptures</key>
           <dict>
             <key>1</key>
@@ -240,7 +274,7 @@
           <array> 
             <dict>
               <key>include</key>
-              <string>#main__2</string>
+              <string>#main__4</string>
             </dict>
            </array>
           <key>end</key>
@@ -279,7 +313,7 @@
           <array> 
             <dict>
               <key>include</key>
-              <string>#main__4</string>
+              <string>#main__6</string>
             </dict>
            </array>
           <key>end</key>
@@ -324,7 +358,7 @@
           <array> 
             <dict>
               <key>include</key>
-              <string>#main__5</string>
+              <string>#main__7</string>
             </dict>
            </array>
           <key>end</key>
@@ -340,7 +374,7 @@
         </dict>
         <dict>
           <key>begin</key>
-          <string>\b(struct)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)(?:\s*(\()?)</string>
+          <string>\b(struct)(\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)(?:\s*(\()?)</string>
           <key>beginCaptures</key>
           <dict>
             <key>1</key>
@@ -368,7 +402,7 @@
           <array> 
             <dict>
               <key>include</key>
-              <string>#main__6</string>
+              <string>#main__8</string>
             </dict>
            </array>
           <key>end</key>
@@ -390,7 +424,7 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>(?:%inline|%struct|\b(private))</string>
+          <string>(?:%inline|%struct|\b(private))\b</string>
           <key>name</key>
           <string>storage.modifier.lys</string>
         </dict>
@@ -408,7 +442,7 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>(\.\^)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>(\.\^)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>captures</key>
           <dict>
             <key>1</key>
@@ -431,7 +465,7 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>(\|\||&amp;&amp;|&amp;|\||\+\+|\-\-|\+|\-|==|!=|==|!==|&lt;=|&gt;=|&lt;&lt;|&gt;&gt;&gt;|&gt;&gt;|&lt;|&gt;|/|\*|\*\*|%|~|\^|!)</string>
+          <string>(?:(\|\||&amp;&amp;|&amp;|\||\+|\-|==|!=|==|!==|&lt;=|&gt;=|&lt;&lt;|&gt;&gt;&gt;|&gt;&gt;|&lt;|&gt;|/|\*|\*\*|%|~|\^|!)+)</string>
           <key>name</key>
           <string>keyword.operator.lys</string>
         </dict>
@@ -447,7 +481,7 @@
         </dict>
         <dict>
           <key>begin</key>
-          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)(\()</string>
+          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)(\()</string>
           <key>beginCaptures</key>
           <dict>
             <key>1</key>
@@ -465,7 +499,7 @@
           <array> 
             <dict>
               <key>include</key>
-              <string>#main__7</string>
+              <string>#main__9</string>
             </dict>
            </array>
           <key>end</key>
@@ -487,7 +521,7 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>name</key>
           <string>variable.other.readwrite.ts.lys</string>
         </dict>
@@ -512,11 +546,40 @@
           <array> 
             <dict>
               <key>include</key>
-              <string>#main__8</string>
+              <string>#main__10</string>
             </dict>
            </array>
           <key>end</key>
           <string>(\})</string>
+          <key>endCaptures</key>
+          <dict>
+            <key>1</key>
+            <dict>
+              <key>name</key>
+              <string>punctuation.lys</string>
+            </dict>
+          </dict>
+        </dict>
+        <dict>
+          <key>begin</key>
+          <string>(\[)</string>
+          <key>beginCaptures</key>
+          <dict>
+            <key>1</key>
+            <dict>
+              <key>name</key>
+              <string>punctuation.lys</string>
+            </dict>
+          </dict>
+          <key>patterns</key>
+          <array> 
+            <dict>
+              <key>include</key>
+              <string>#main__11</string>
+            </dict>
+           </array>
+          <key>end</key>
+          <string>(\])</string>
           <key>endCaptures</key>
           <dict>
             <key>1</key>
@@ -541,7 +604,7 @@
           <array> 
             <dict>
               <key>include</key>
-              <string>#main__9</string>
+              <string>#main__12</string>
             </dict>
            </array>
           <key>end</key>
@@ -573,13 +636,13 @@
       <array> 
         <dict>
           <key>begin</key>
-          <string>(#\[)</string>
+          <string>(#(!)?\[)</string>
           <key>beginCaptures</key>
           <dict>
             <key>1</key>
             <dict>
               <key>name</key>
-              <string>comment.block.preprocessor.lys</string>
+              <string>punctuation.lys</string>
             </dict>
           </dict>
           <key>patterns</key>
@@ -596,7 +659,7 @@
             <key>1</key>
             <dict>
               <key>name</key>
-              <string>comment.block.preprocessor.lys</string>
+              <string>punctuation.lys</string>
             </dict>
           </dict>
         </dict>
@@ -612,7 +675,7 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>name</key>
           <string>entity.other.attribute-name.lys</string>
         </dict>
@@ -682,13 +745,53 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>name</key>
           <string>variable.parameter.function.lys</string>
         </dict>
         <dict>
           <key>include</key>
           <string>#types</string>
+        </dict>
+        <dict>
+          <key>include</key>
+          <string>#multi_line_comment</string>
+        </dict>
+       </array>
+    </dict>
+    <key>main__10</key>
+    <dict>
+      <key>patterns</key>
+      <array> 
+        <dict>
+          <key>include</key>
+          <string>#main</string>
+        </dict>
+       </array>
+    </dict>
+    <key>main__11</key>
+    <dict>
+      <key>patterns</key>
+      <array> 
+        <dict>
+          <key>include</key>
+          <string>#main</string>
+        </dict>
+       </array>
+    </dict>
+    <key>main__12</key>
+    <dict>
+      <key>patterns</key>
+      <array> 
+        <dict>
+          <key>match</key>
+          <string>(,)</string>
+          <key>name</key>
+          <string>punctuation.lys</string>
+        </dict>
+        <dict>
+          <key>include</key>
+          <string>#main</string>
         </dict>
        </array>
     </dict>
@@ -697,8 +800,48 @@
       <key>patterns</key>
       <array> 
         <dict>
+          <key>include</key>
+          <string>#multi_line_comment</string>
+        </dict>
+        <dict>
+          <key>include</key>
+          <string>#types</string>
+        </dict>
+        <dict>
+          <key>match</key>
+          <string>([^\s])</string>
+          <key>name</key>
+          <string>invalid.lys</string>
+        </dict>
+       </array>
+    </dict>
+    <key>main__3</key>
+    <dict>
+      <key>patterns</key>
+      <array> 
+        <dict>
+          <key>include</key>
+          <string>#multi_line_comment</string>
+        </dict>
+        <dict>
+          <key>include</key>
+          <string>#types</string>
+        </dict>
+        <dict>
+          <key>match</key>
+          <string>([^\s])</string>
+          <key>name</key>
+          <string>invalid.lys</string>
+        </dict>
+       </array>
+    </dict>
+    <key>main__4</key>
+    <dict>
+      <key>patterns</key>
+      <array> 
+        <dict>
           <key>begin</key>
-          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)(\s*\()</string>
+          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)(\s*\()</string>
           <key>beginCaptures</key>
           <dict>
             <key>1</key>
@@ -716,7 +859,7 @@
           <array> 
             <dict>
               <key>include</key>
-              <string>#main__3</string>
+              <string>#main__5</string>
             </dict>
            </array>
           <key>end</key>
@@ -732,13 +875,13 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>name</key>
           <string>entity.name.class.lys</string>
         </dict>
        </array>
     </dict>
-    <key>main__3</key>
+    <key>main__5</key>
     <dict>
       <key>patterns</key>
       <array> 
@@ -750,9 +893,13 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>name</key>
           <string>variable.parameter.function.lys</string>
+        </dict>
+        <dict>
+          <key>include</key>
+          <string>#multi_line_comment</string>
         </dict>
         <dict>
           <key>include</key>
@@ -760,7 +907,7 @@
         </dict>
        </array>
     </dict>
-    <key>main__4</key>
+    <key>main__6</key>
     <dict>
       <key>patterns</key>
       <array> 
@@ -770,13 +917,13 @@
         </dict>
        </array>
     </dict>
-    <key>main__5</key>
+    <key>main__7</key>
     <dict>
       <key>patterns</key>
       <array> 
         <dict>
           <key>match</key>
-          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>name</key>
           <string>variable.other.constant.lys</string>
         </dict>
@@ -792,51 +939,29 @@
         </dict>
        </array>
     </dict>
-    <key>main__6</key>
-    <dict>
-      <key>patterns</key>
-      <array> 
-        <dict>
-          <key>match</key>
-          <string>(,)</string>
-          <key>name</key>
-          <string>punctuation.lys</string>
-        </dict>
-        <dict>
-          <key>match</key>
-          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
-          <key>name</key>
-          <string>variable.parameter.function.lys</string>
-        </dict>
-        <dict>
-          <key>include</key>
-          <string>#types</string>
-        </dict>
-       </array>
-    </dict>
-    <key>main__7</key>
-    <dict>
-      <key>patterns</key>
-      <array> 
-        <dict>
-          <key>match</key>
-          <string>(,)</string>
-          <key>name</key>
-          <string>punctuation.lys</string>
-        </dict>
-        <dict>
-          <key>include</key>
-          <string>#main</string>
-        </dict>
-       </array>
-    </dict>
     <key>main__8</key>
     <dict>
       <key>patterns</key>
       <array> 
         <dict>
+          <key>match</key>
+          <string>(,)</string>
+          <key>name</key>
+          <string>punctuation.lys</string>
+        </dict>
+        <dict>
+          <key>match</key>
+          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
+          <key>name</key>
+          <string>variable.parameter.function.lys</string>
+        </dict>
+        <dict>
           <key>include</key>
-          <string>#main</string>
+          <string>#multi_line_comment</string>
+        </dict>
+        <dict>
+          <key>include</key>
+          <string>#types</string>
         </dict>
        </array>
     </dict>
@@ -916,7 +1041,7 @@
       <array> 
         <dict>
           <key>match</key>
-          <string>([\x{003a}\x{007c}\x{0026}]\s*)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>([\x{003a}\x{007c}\x{0026}]\s*)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>captures</key>
           <dict>
             <key>1</key>
@@ -933,7 +1058,7 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>(\b(?:is|as)\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>(\b(?:is|as)\s+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>captures</key>
           <dict>
             <key>1</key>
@@ -991,7 +1116,7 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>name</key>
           <string>support.type.lys</string>
         </dict>
@@ -1023,7 +1148,7 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>(\$)((?:[A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*::)+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>(\$)((?:[A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*::)+)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>captures</key>
           <dict>
             <key>1</key>
@@ -1045,7 +1170,7 @@
         </dict>
         <dict>
           <key>match</key>
-          <string>(\$)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*)</string>
+          <string>(\$)([A-Za-z\x{0024}_][A-Za-z0-9\x{0024}_]*|\?\?\?)</string>
           <key>name</key>
           <string>variable.other.readwrite.ts.lys</string>
         </dict>

@@ -50,9 +50,9 @@ styles [] {
 }
 
 .decorator : style {
-  color                 = light_green
-  ace_scope             = comment.block.preprocessor
-  textmate_scope        = comment.block.preprocessor
+  color                 = light_grey
+  ace_scope             = punctuation
+  textmate_scope        = punctuation
   pygments_scope        = Name.Decorator
 }
 
@@ -237,12 +237,12 @@ styles [] {
 #################################################
 
 __MODULE \= ((?:[A-Za-z$_][A-Za-z0-9$_]*::)+)
-__IDENTIFIER \= ([A-Za-z$_][A-Za-z0-9$_]*)
+__IDENTIFIER \= ([A-Za-z$_][A-Za-z0-9$_]*|\?\?\?)
 __CONST_IDENTIFIER \= ([A-Z][A-Z0-9_]*)
 __TYPE_IDENTIFIER \= ([A-Z][A-Za-z0-9$_]*)
 __KEYWORD \= \b(if|match|case|fun|else|loop|continue|break)\b
-__MODIFIER \= (?:%inline|%struct|\b(private))
-__OPERATOR \= (\w+|\|\||&&|&|\||\+\+|\-\-|\+|\-|==|!=|==|!==|<=|>=|<<|>>>|>>|<|>|/|\*|\*\*|%|~|\^)
+__MODIFIER \= (?:%inline|%struct|\b(private))\b
+__OPERATOR \= (\w+|\|\||&&|&|\||\+\+|\-\-|\+|\-|==|!=|==|!==|<=|>=|<<|>>>|>>|<|>|/|\*|\*\*|%|~|\^|\[\])
 
 contexts [] {
 
@@ -269,14 +269,35 @@ contexts [] {
         styles []       = .parameter;
       }
       : include "types" ;
+      : include "multi_line_comment" ;
     }
-    : pattern {
+    : inline_push {
       regex          \= \b(val|var)(\s+)$${__CONST_IDENTIFIER}
       styles []       = .varKeyword, .text, .const;
+      : pop {
+        regex       \= (\=)
+        styles []    = .punctuation;
+      }
+      : include "multi_line_comment" ;
+      : include "types" ;
+      : pattern {
+        regex          \= ([^\s])
+        styles []       = .illegal;
+      }
     }
-    : pattern {
+    : inline_push {
       regex          \= \b(val|var)(\s+)$${__IDENTIFIER}
       styles []       = .varKeyword, .text, .varName;
+      : pop {
+        regex       \= (\=)
+        styles []    = .punctuation;
+      }
+      : include "multi_line_comment" ;
+      : include "types" ;
+      : pattern {
+        regex          \= ([^\s])
+        styles []       = .illegal;
+      }
     }
     : pattern {
       regex          \= \b(import)(\s+)$${__MODULE}
@@ -316,6 +337,7 @@ contexts [] {
           regex          \= $${__IDENTIFIER}
           styles []       = .parameter;
         }
+        : include "multi_line_comment" ;
         : include "types" ;
       }
       : pattern {
@@ -368,6 +390,7 @@ contexts [] {
         regex          \= $${__IDENTIFIER}
         styles []       = .parameter;
       }
+      : include "multi_line_comment" ;
       : include "types" ;
     }
     : pattern {
@@ -395,7 +418,7 @@ contexts [] {
       styles []       = .accessor;
     }
     : pattern {
-      regex          \= (\|\||&&|&|\||\+\+|\-\-|\+|\-|==|!=|==|!==|<=|>=|<<|>>>|>>|<|>|/|\*|\*\*|%|~|\^|!)
+      regex          \= (?:(\|\||&&|&|\||\+|\-|==|!=|==|!==|<=|>=|<<|>>>|>>|<|>|/|\*|\*\*|%|~|\^|!)+)
       styles []       = .operator;
     }
     : include "types" ;
@@ -433,6 +456,15 @@ contexts [] {
       styles []       = .punctuation;
       : pop {  
         regex       \= (\})
+        styles []    = .punctuation;
+      }
+      : include "main" ;
+    }
+    : inline_push {
+      regex          \= (\[)
+      styles []       = .punctuation;
+      : pop {  
+        regex       \= (\])
         styles []    = .punctuation;
       }
       : include "main" ;
@@ -579,7 +611,7 @@ contexts [] {
 
   decorators : context {
     : inline_push {
-      regex          \= (#\[)
+      regex          \= (#(!)?\[)
       styles []       = .decorator;
       : pop {
         regex       \= (\])

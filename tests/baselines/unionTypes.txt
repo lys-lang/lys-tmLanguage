@@ -27,16 +27,16 @@ Grammar: Lys.tmLanguage
         ^
         [3, 8]: source.lys support.type.lys 
             ^
-            [3, 12]: source.lys variable.other.constant.lys 
+            [3, 12]: source.lys support.type.lys 
                 ^
-                [3, 16]: source.lys variable.other.constant.lys 
+                [3, 16]: source.lys support.type.lys 
 >var x: Aa | Ba | Ca = 1
         ^^
         [4, 8]: source.lys support.type.lys 
              ^^
-             [4, 13]: source.lys variable.other.object.lys 
+             [4, 13]: source.lys support.type.lys 
                   ^^
-                  [4, 18]: source.lys variable.other.object.lys 
+                  [4, 18]: source.lys support.type.lys 
 >fun test(x: A | B | C) = 1
              ^
              [5, 13]: source.lys support.type.lys 

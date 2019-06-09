@@ -84,20 +84,16 @@ Grammar: Lys.tmLanguage
         source.lys support.type.lys
          ^
          source.lys
-          ^
-          source.lys keyword.operator.lys
-           ^
-           source.lys
+          ^^
+          source.lys punctuation.lys
             ^
-            source.lys variable.other.constant.lys
+            source.lys support.type.lys
              ^
              source.lys
-              ^
-              source.lys keyword.operator.lys
-               ^
-               source.lys
+              ^^
+              source.lys punctuation.lys
                 ^
-                source.lys variable.other.constant.lys
+                source.lys support.type.lys
                  ^
                  source.lys
                   ^
@@ -119,20 +115,16 @@ Grammar: Lys.tmLanguage
         source.lys support.type.lys
           ^
           source.lys
-           ^
-           source.lys keyword.operator.lys
-            ^
-            source.lys
+           ^^
+           source.lys punctuation.lys
              ^^
-             source.lys variable.other.object.lys
+             source.lys support.type.lys
                ^
                source.lys
-                ^
-                source.lys keyword.operator.lys
-                 ^
-                 source.lys
+                ^^
+                source.lys punctuation.lys
                   ^^
-                  source.lys variable.other.object.lys
+                  source.lys support.type.lys
                     ^
                     source.lys
                      ^
