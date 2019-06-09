@@ -1,0 +1,7 @@
+enum Number {
+  Infinity
+  NDet
+  Real(number: f32)
+  Natural(number: i32)
+  Complex(real: f32, imaginary: f32)
+}

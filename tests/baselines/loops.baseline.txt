@@ -1,0 +1,220 @@
+original file
+-----------------------------------
+
+
+fun test(): void = {
+  var x = 1
+  loop {
+    x = x + 1
+    if (x > 10)
+      break
+  }
+}
+
+fun test(): void = {
+  var x = 1
+  loop {
+    x = x + 1
+    continue
+  }
+}
+-----------------------------------
+
+Grammar: Lys.tmLanguage
+-----------------------------------
+>
+ ^
+ source.lys
+>
+ ^
+ source.lys
+>fun test(): void = {
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^^^
+     source.lys entity.name.function.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys punctuation.lys
+           ^^
+           source.lys punctuation.lys
+             ^^^^
+             source.lys support.type.lys
+                 ^
+                 source.lys
+                  ^
+                  source.lys punctuation.lys
+                   ^
+                   source.lys
+                    ^
+                    source.lys punctuation.lys
+>  var x = 1
+ ^^
+ source.lys
+   ^^^
+   source.lys storage.type.var.lys
+      ^
+      source.lys text.lys
+       ^
+       source.lys entity.name.variable.lys
+        ^
+        source.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys
+           ^
+           source.lys constant.numeric.lys
+>  loop {
+ ^^
+ source.lys
+   ^^^^
+   source.lys keyword.lys
+       ^
+       source.lys
+        ^
+        source.lys punctuation.lys
+>    x = x + 1
+ ^^^^
+ source.lys
+     ^
+     source.lys variable.other.readwrite.ts.lys
+      ^
+      source.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys
+         ^
+         source.lys variable.other.readwrite.ts.lys
+          ^
+          source.lys
+           ^
+           source.lys keyword.operator.lys
+            ^
+            source.lys
+             ^
+             source.lys constant.numeric.lys
+>    if (x > 10)
+ ^^^^
+ source.lys
+     ^^
+     source.lys keyword.lys
+       ^
+       source.lys
+        ^
+        source.lys punctuation.lys
+         ^
+         source.lys variable.other.readwrite.ts.lys
+          ^
+          source.lys
+           ^
+           source.lys keyword.operator.lys
+            ^
+            source.lys
+             ^^
+             source.lys constant.numeric.lys
+               ^
+               source.lys punctuation.lys
+>      break
+ ^^^^^^
+ source.lys
+       ^^^^^
+       source.lys keyword.lys
+>  }
+ ^^
+ source.lys
+   ^
+   source.lys punctuation.lys
+>}
+ ^
+ source.lys punctuation.lys
+>
+ ^
+ source.lys
+>fun test(): void = {
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^^^
+     source.lys entity.name.function.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys punctuation.lys
+           ^^
+           source.lys punctuation.lys
+             ^^^^
+             source.lys support.type.lys
+                 ^
+                 source.lys
+                  ^
+                  source.lys punctuation.lys
+                   ^
+                   source.lys
+                    ^
+                    source.lys punctuation.lys
+>  var x = 1
+ ^^
+ source.lys
+   ^^^
+   source.lys storage.type.var.lys
+      ^
+      source.lys text.lys
+       ^
+       source.lys entity.name.variable.lys
+        ^
+        source.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys
+           ^
+           source.lys constant.numeric.lys
+>  loop {
+ ^^
+ source.lys
+   ^^^^
+   source.lys keyword.lys
+       ^
+       source.lys
+        ^
+        source.lys punctuation.lys
+>    x = x + 1
+ ^^^^
+ source.lys
+     ^
+     source.lys variable.other.readwrite.ts.lys
+      ^
+      source.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys
+         ^
+         source.lys variable.other.readwrite.ts.lys
+          ^
+          source.lys
+           ^
+           source.lys keyword.operator.lys
+            ^
+            source.lys
+             ^
+             source.lys constant.numeric.lys
+>    continue
+ ^^^^
+ source.lys
+     ^^^^^^^^
+     source.lys keyword.lys
+>  }
+ ^^
+ source.lys
+   ^
+   source.lys punctuation.lys
+>}
+ ^
+ source.lys punctuation.lys

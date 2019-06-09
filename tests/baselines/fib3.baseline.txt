@@ -1,0 +1,278 @@
+original file
+-----------------------------------
+
+private fun fibo(n: i32, x1: i32, x2: i32): i32 = {
+  if (n > 0) {
+    fibo(n - 1, x2, x1 + x2)
+  } else {
+    x1
+  }
+}
+
+fun fib(n: i32): i32 = {
+  fibo(n, 0, 1)
+}
+
+fun test(): i32 = {
+  fib(46) // must be 1836311903
+}
+
+
+-----------------------------------
+
+Grammar: Lys.tmLanguage
+-----------------------------------
+>
+ ^
+ source.lys
+>private fun fibo(n: i32, x1: i32, x2: i32): i32 = {
+ ^^^^^^^
+ source.lys storage.modifier.lys
+        ^
+        source.lys
+         ^^^
+         source.lys storage.type.function.lys.lys
+            ^
+            source.lys text.lys
+             ^^^^
+             source.lys entity.name.function.lys
+                 ^
+                 source.lys punctuation.lys
+                  ^
+                  source.lys variable.parameter.function.lys
+                   ^^
+                   source.lys punctuation.lys
+                     ^^^
+                     source.lys support.type.lys
+                        ^
+                        source.lys punctuation.lys
+                         ^
+                         source.lys
+                          ^^
+                          source.lys variable.parameter.function.lys
+                            ^^
+                            source.lys punctuation.lys
+                              ^^^
+                              source.lys support.type.lys
+                                 ^
+                                 source.lys punctuation.lys
+                                  ^
+                                  source.lys
+                                   ^^
+                                   source.lys variable.parameter.function.lys
+                                     ^^
+                                     source.lys punctuation.lys
+                                       ^^^
+                                       source.lys support.type.lys
+                                          ^
+                                          source.lys punctuation.lys
+                                           ^^
+                                           source.lys punctuation.lys
+                                             ^^^
+                                             source.lys support.type.lys
+                                                ^
+                                                source.lys
+                                                 ^
+                                                 source.lys punctuation.lys
+                                                  ^
+                                                  source.lys
+                                                   ^
+                                                   source.lys punctuation.lys
+>  if (n > 0) {
+ ^^
+ source.lys
+   ^^
+   source.lys keyword.lys
+     ^
+     source.lys
+      ^
+      source.lys punctuation.lys
+       ^
+       source.lys variable.other.readwrite.ts.lys
+        ^
+        source.lys
+         ^
+         source.lys keyword.operator.lys
+          ^
+          source.lys
+           ^
+           source.lys constant.numeric.lys
+            ^
+            source.lys punctuation.lys
+             ^
+             source.lys
+              ^
+              source.lys punctuation.lys
+>    fibo(n - 1, x2, x1 + x2)
+ ^^^^
+ source.lys
+     ^^^^
+     source.lys entity.name.function.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys variable.other.readwrite.ts.lys
+           ^
+           source.lys
+            ^
+            source.lys keyword.operator.lys
+             ^
+             source.lys
+              ^
+              source.lys constant.numeric.lys
+               ^
+               source.lys punctuation.lys
+                ^
+                source.lys
+                 ^^
+                 source.lys variable.other.readwrite.ts.lys
+                   ^
+                   source.lys punctuation.lys
+                    ^
+                    source.lys
+                     ^^
+                     source.lys variable.other.readwrite.ts.lys
+                       ^
+                       source.lys
+                        ^
+                        source.lys keyword.operator.lys
+                         ^
+                         source.lys
+                          ^^
+                          source.lys variable.other.readwrite.ts.lys
+                            ^
+                            source.lys punctuation.lys
+>  } else {
+ ^^
+ source.lys
+   ^
+   source.lys punctuation.lys
+    ^
+    source.lys
+     ^^^^
+     source.lys keyword.lys
+         ^
+         source.lys
+          ^
+          source.lys punctuation.lys
+>    x1
+ ^^^^
+ source.lys
+     ^^
+     source.lys variable.other.readwrite.ts.lys
+>  }
+ ^^
+ source.lys
+   ^
+   source.lys punctuation.lys
+>}
+ ^
+ source.lys punctuation.lys
+>
+ ^
+ source.lys
+>fun fib(n: i32): i32 = {
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^^
+     source.lys entity.name.function.lys
+        ^
+        source.lys punctuation.lys
+         ^
+         source.lys variable.parameter.function.lys
+          ^^
+          source.lys punctuation.lys
+            ^^^
+            source.lys support.type.lys
+               ^
+               source.lys punctuation.lys
+                ^^
+                source.lys punctuation.lys
+                  ^^^
+                  source.lys support.type.lys
+                     ^
+                     source.lys
+                      ^
+                      source.lys punctuation.lys
+                       ^
+                       source.lys
+                        ^
+                        source.lys punctuation.lys
+>  fibo(n, 0, 1)
+ ^^
+ source.lys
+   ^^^^
+   source.lys entity.name.function.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys variable.other.readwrite.ts.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys
+           ^
+           source.lys constant.numeric.lys
+            ^
+            source.lys punctuation.lys
+             ^
+             source.lys
+              ^
+              source.lys constant.numeric.lys
+               ^
+               source.lys punctuation.lys
+>}
+ ^
+ source.lys punctuation.lys
+>
+ ^
+ source.lys
+>fun test(): i32 = {
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^^^
+     source.lys entity.name.function.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys punctuation.lys
+           ^^
+           source.lys punctuation.lys
+             ^^^
+             source.lys support.type.lys
+                ^
+                source.lys
+                 ^
+                 source.lys punctuation.lys
+                  ^
+                  source.lys
+                   ^
+                   source.lys punctuation.lys
+>  fib(46) // must be 1836311903
+ ^^
+ source.lys
+   ^^^
+   source.lys entity.name.function.lys
+      ^
+      source.lys punctuation.lys
+       ^^
+       source.lys constant.numeric.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys
+           ^^^^^^^^^^^^^^^^^^^^^
+           source.lys comment.lys
+>}
+ ^
+ source.lys punctuation.lys
+>
+ ^
+ source.lys
+>
+ ^
+ source.lys

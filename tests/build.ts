@@ -1,10 +1,10 @@
 import * as vt from "vscode-textmate/release/main";
 import path = require("path");
 
-const tsGrammarFileName = "Lys.tmLanguage";
+const lysGrammarFileName = "Lys.tmLanguage";
 
 const register = new vt.Registry();
-const grammar = register.loadGrammar("../" + tsGrammarFileName);
+const lysGrammar = register.loadGrammarFromPathSync(path.join(__dirname, "..", lysGrammarFileName));
 
 const marker = "^^";
 
@@ -35,7 +35,7 @@ function getGrammarInfo(grammarFileName: string) {
   return "Grammar: " + grammarFileName + "\n-----------------------------------\n";
 }
 
-const grammarInfo = getGrammarInfo(tsGrammarFileName);
+const lysGrammarInfo = getGrammarInfo(lysGrammarFileName);
 
 interface Grammar {
   grammar: vt.IGrammar;
@@ -78,18 +78,20 @@ function hasDiffLineToken(first: vt.IToken, second: vt.IToken) {
   );
 }
 
-function getBaseline(grammar: Grammar, outputLines: string[]) {
+function getBaseline(outputLines: string[]) {
+  const grammarInfo = lysGrammarInfo;
   return grammarInfo + outputLines.join("\n");
 }
 
-export function generateScopes(
-  text: string,
-  parsedFileName: path.ParsedPath
-): Promise<{ markerScopes: string; wholeBaseline: string }> {
-  const oriLines = text.split("\n");
+export function generateScopes(text: string): { markerScopes: string; wholeBaseline: string } {
+  const grammar = lysGrammar;
+  const oriLines = text.split(/\r\n|\r|\n/);
 
-  let mainGrammar = initGrammar(valueGrammar);
+  let mainGrammar = initGrammar(grammar);
   let otherGrammar: Grammar = null;
+  if (oriLines[0].search(/\/\/\s*@onlyOwnGrammar/i) < 0) {
+    otherGrammar = initGrammar(lysGrammar);
+  }
 
   let outputLines: string[] = [];
   let cleanLines: string[] = [];
@@ -131,19 +133,14 @@ export function generateScopes(
     }
   }
 
-  const otherDiffBaseline = foundDiff ? "\n\n\n" + getBaseline(otherGrammar, otherBaselines) : "";
+  const otherDiffBaseline = foundDiff ? "\n\n\n" + getBaseline(otherBaselines) : "";
   return {
-    markerScopes: markers ? getInputFile(oriLines) + getBaseline(mainGrammar, outputLines) : null,
-    wholeBaseline: getInputFile(cleanLines) + getBaseline(mainGrammar, baselineLines) + otherDiffBaseline
+    markerScopes: markers ? getInputFile(oriLines) + getBaseline(outputLines) : null,
+    wholeBaseline: getInputFile(cleanLines) + getBaseline(baselineLines) + otherDiffBaseline
   };
 }
 
 function writeTokenLine(token: vt.IToken, preTextForToken: string, postTextForToken: string, outputLines: string[]) {
-  let scopes = token.scopes;
-  if (scopes[0].toString() === "source.data-weave") scopes.shift();
-
-  if (scopes.length === 0) return;
-
   let startingSpaces = " ";
   for (let j = 0; j < token.startIndex; j++) {
     startingSpaces += " ";
@@ -154,6 +151,5 @@ function writeTokenLine(token: vt.IToken, preTextForToken: string, postTextForTo
     locatingString += "^";
   }
   outputLines.push(startingSpaces + locatingString);
-
-  outputLines.push(startingSpaces + preTextForToken + scopes.join(" ") + postTextForToken);
+  outputLines.push(startingSpaces + preTextForToken + token.scopes.join(" ") + postTextForToken);
 }

@@ -1,0 +1,300 @@
+original file
+-----------------------------------
+type test = %struct{}
+impl test {
+  fun x(): i32 = 1
+}
+
+fun x(a): i32 = 1
+fun x1(): i32 = 1 + 2 / 3 * 4 - -5
+fun x2(x): i32 = ~x
+fun x3(x): i32 = -x
+fun x4(): i32 = ~99
+fun x5(): i32 = ~test.x()
+fun x6(): boolean = !true
+
+-----------------------------------
+
+Grammar: Lys.tmLanguage
+-----------------------------------
+>type test = %struct{}
+ ^^^^
+ source.lys storage.type.type.lys.lys
+     ^
+     source.lys text.lys
+      ^^^^
+      source.lys entity.name.class.lys
+          ^
+          source.lys
+           ^
+           source.lys punctuation.lys
+            ^
+            source.lys
+             ^^^^^^^
+             source.lys storage.modifier.lys
+                    ^
+                    source.lys punctuation.lys
+                     ^
+                     source.lys punctuation.lys
+>impl test {
+ ^^^^
+ source.lys storage.type.type.lys.lys
+     ^
+     source.lys text.lys
+      ^^^^
+      source.lys entity.name.class.lys
+          ^
+          source.lys
+           ^
+           source.lys punctuation.lys
+>  fun x(): i32 = 1
+ ^^
+ source.lys
+   ^^^
+   source.lys storage.type.function.lys.lys
+      ^
+      source.lys text.lys
+       ^
+       source.lys entity.name.function.lys
+        ^
+        source.lys punctuation.lys
+         ^
+         source.lys punctuation.lys
+          ^^
+          source.lys punctuation.lys
+            ^^^
+            source.lys support.type.lys
+               ^
+               source.lys
+                ^
+                source.lys punctuation.lys
+                 ^
+                 source.lys
+                  ^
+                  source.lys constant.numeric.lys
+>}
+ ^
+ source.lys punctuation.lys
+>
+ ^
+ source.lys
+>fun x(a): i32 = 1
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^
+     source.lys entity.name.function.lys
+      ^
+      source.lys punctuation.lys
+       ^
+       source.lys variable.parameter.function.lys
+        ^
+        source.lys punctuation.lys
+         ^^
+         source.lys punctuation.lys
+           ^^^
+           source.lys support.type.lys
+              ^
+              source.lys
+               ^
+               source.lys punctuation.lys
+                ^
+                source.lys
+                 ^
+                 source.lys constant.numeric.lys
+>fun x1(): i32 = 1 + 2 / 3 * 4 - -5
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^
+     source.lys entity.name.function.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys punctuation.lys
+         ^^
+         source.lys punctuation.lys
+           ^^^
+           source.lys support.type.lys
+              ^
+              source.lys
+               ^
+               source.lys punctuation.lys
+                ^
+                source.lys
+                 ^
+                 source.lys constant.numeric.lys
+                  ^
+                  source.lys
+                   ^
+                   source.lys keyword.operator.lys
+                    ^
+                    source.lys
+                     ^
+                     source.lys constant.numeric.lys
+                      ^
+                      source.lys
+                       ^
+                       source.lys keyword.operator.lys
+                        ^
+                        source.lys
+                         ^
+                         source.lys constant.numeric.lys
+                          ^
+                          source.lys
+                           ^
+                           source.lys keyword.operator.lys
+                            ^
+                            source.lys
+                             ^
+                             source.lys constant.numeric.lys
+                              ^
+                              source.lys
+                               ^
+                               source.lys keyword.operator.lys
+                                ^
+                                source.lys
+                                 ^^
+                                 source.lys constant.numeric.lys
+>fun x2(x): i32 = ~x
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^
+     source.lys entity.name.function.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys variable.parameter.function.lys
+         ^
+         source.lys punctuation.lys
+          ^^
+          source.lys punctuation.lys
+            ^^^
+            source.lys support.type.lys
+               ^
+               source.lys
+                ^
+                source.lys punctuation.lys
+                 ^
+                 source.lys
+                  ^
+                  source.lys keyword.operator.lys
+                   ^
+                   source.lys variable.other.readwrite.ts.lys
+>fun x3(x): i32 = -x
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^
+     source.lys entity.name.function.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys variable.parameter.function.lys
+         ^
+         source.lys punctuation.lys
+          ^^
+          source.lys punctuation.lys
+            ^^^
+            source.lys support.type.lys
+               ^
+               source.lys
+                ^
+                source.lys punctuation.lys
+                 ^
+                 source.lys
+                  ^
+                  source.lys keyword.operator.lys
+                   ^
+                   source.lys variable.other.readwrite.ts.lys
+>fun x4(): i32 = ~99
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^
+     source.lys entity.name.function.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys punctuation.lys
+         ^^
+         source.lys punctuation.lys
+           ^^^
+           source.lys support.type.lys
+              ^
+              source.lys
+               ^
+               source.lys punctuation.lys
+                ^
+                source.lys
+                 ^
+                 source.lys keyword.operator.lys
+                  ^^
+                  source.lys constant.numeric.lys
+>fun x5(): i32 = ~test.x()
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^
+     source.lys entity.name.function.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys punctuation.lys
+         ^^
+         source.lys punctuation.lys
+           ^^^
+           source.lys support.type.lys
+              ^
+              source.lys
+               ^
+               source.lys punctuation.lys
+                ^
+                source.lys
+                 ^
+                 source.lys keyword.operator.lys
+                  ^^^^
+                  source.lys variable.other.readwrite.ts.lys
+                      ^
+                      source.lys punctuation.accessor.lys
+                       ^
+                       source.lys entity.name.function.lys
+                        ^
+                        source.lys punctuation.lys
+                         ^
+                         source.lys punctuation.lys
+>fun x6(): boolean = !true
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^
+     source.lys entity.name.function.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys punctuation.lys
+         ^^
+         source.lys punctuation.lys
+           ^^^^^^^
+           source.lys support.type.lys
+                  ^
+                  source.lys
+                   ^
+                   source.lys punctuation.lys
+                    ^
+                    source.lys
+                     ^
+                     source.lys keyword.operator.lys
+                      ^^^^
+                      source.lys constant.language.lys
+>
+ ^
+ source.lys

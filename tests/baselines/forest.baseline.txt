@@ -1,0 +1,446 @@
+original file
+-----------------------------------
+enum Tree {
+  Empty
+  Node(a: Tree | Forest)
+}
+
+enum Forest {
+  Nil
+  Cons(tree: Tree | Forest)
+}
+
+fun testPassing(): void = {
+  var a = Nil
+  var b = Cons(Empty)
+  var c = Cons(Nil)
+  var d = Cons(Node(Empty))
+  var e = Node(Nil)
+
+  support::test::assert( a is Nil            == true )
+  support::test::assert( a is Forest         == true )
+  support::test::assert( b is Forest         == true )
+  support::test::assert( c is Cons           == true )
+  support::test::assert( e is Node           == true )
+  support::test::assert( e is Tree           == true )
+}
+-----------------------------------
+
+Grammar: Lys.tmLanguage
+-----------------------------------
+>enum Tree {
+ ^^^^
+ source.lys storage.type.type.lys.lys
+     ^
+     source.lys text.lys
+      ^^^^
+      source.lys entity.name.class.lys
+          ^
+          source.lys
+           ^
+           source.lys punctuation.lys
+>  Empty
+ ^^
+ source.lys
+   ^^^^^
+   source.lys entity.name.class.lys
+>  Node(a: Tree | Forest)
+ ^^
+ source.lys
+   ^^^^
+   source.lys entity.name.class.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys variable.parameter.function.lys
+         ^^
+         source.lys punctuation.lys
+           ^^^^
+           source.lys support.type.lys
+               ^
+               source.lys
+                ^^
+                source.lys punctuation.lys
+                  ^^^^^^
+                  source.lys support.type.lys
+                        ^
+                        source.lys punctuation.lys
+>}
+ ^
+ source.lys punctuation.lys
+>
+ ^
+ source.lys
+>enum Forest {
+ ^^^^
+ source.lys storage.type.type.lys.lys
+     ^
+     source.lys text.lys
+      ^^^^^^
+      source.lys entity.name.class.lys
+            ^
+            source.lys
+             ^
+             source.lys punctuation.lys
+>  Nil
+ ^^
+ source.lys
+   ^^^
+   source.lys entity.name.class.lys
+>  Cons(tree: Tree | Forest)
+ ^^
+ source.lys
+   ^^^^
+   source.lys entity.name.class.lys
+       ^
+       source.lys punctuation.lys
+        ^^^^
+        source.lys variable.parameter.function.lys
+            ^^
+            source.lys punctuation.lys
+              ^^^^
+              source.lys support.type.lys
+                  ^
+                  source.lys
+                   ^^
+                   source.lys punctuation.lys
+                     ^^^^^^
+                     source.lys support.type.lys
+                           ^
+                           source.lys punctuation.lys
+>}
+ ^
+ source.lys punctuation.lys
+>
+ ^
+ source.lys
+>fun testPassing(): void = {
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^^^^^^^^^^
+     source.lys entity.name.function.lys
+                ^
+                source.lys punctuation.lys
+                 ^
+                 source.lys punctuation.lys
+                  ^^
+                  source.lys punctuation.lys
+                    ^^^^
+                    source.lys support.type.lys
+                        ^
+                        source.lys
+                         ^
+                         source.lys punctuation.lys
+                          ^
+                          source.lys
+                           ^
+                           source.lys punctuation.lys
+>  var a = Nil
+ ^^
+ source.lys
+   ^^^
+   source.lys storage.type.var.lys
+      ^
+      source.lys text.lys
+       ^
+       source.lys entity.name.variable.lys
+        ^
+        source.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys
+           ^^^
+           source.lys variable.other.object.lys
+>  var b = Cons(Empty)
+ ^^
+ source.lys
+   ^^^
+   source.lys storage.type.var.lys
+      ^
+      source.lys text.lys
+       ^
+       source.lys entity.name.variable.lys
+        ^
+        source.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys
+           ^^^^
+           source.lys entity.name.function.lys
+               ^
+               source.lys punctuation.lys
+                ^^^^^
+                source.lys variable.other.object.lys
+                     ^
+                     source.lys punctuation.lys
+>  var c = Cons(Nil)
+ ^^
+ source.lys
+   ^^^
+   source.lys storage.type.var.lys
+      ^
+      source.lys text.lys
+       ^
+       source.lys entity.name.variable.lys
+        ^
+        source.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys
+           ^^^^
+           source.lys entity.name.function.lys
+               ^
+               source.lys punctuation.lys
+                ^^^
+                source.lys variable.other.object.lys
+                   ^
+                   source.lys punctuation.lys
+>  var d = Cons(Node(Empty))
+ ^^
+ source.lys
+   ^^^
+   source.lys storage.type.var.lys
+      ^
+      source.lys text.lys
+       ^
+       source.lys entity.name.variable.lys
+        ^
+        source.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys
+           ^^^^
+           source.lys entity.name.function.lys
+               ^
+               source.lys punctuation.lys
+                ^^^^
+                source.lys entity.name.function.lys
+                    ^
+                    source.lys punctuation.lys
+                     ^^^^^
+                     source.lys variable.other.object.lys
+                          ^
+                          source.lys punctuation.lys
+                           ^
+                           source.lys punctuation.lys
+>  var e = Node(Nil)
+ ^^
+ source.lys
+   ^^^
+   source.lys storage.type.var.lys
+      ^
+      source.lys text.lys
+       ^
+       source.lys entity.name.variable.lys
+        ^
+        source.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys
+           ^^^^
+           source.lys entity.name.function.lys
+               ^
+               source.lys punctuation.lys
+                ^^^
+                source.lys variable.other.object.lys
+                   ^
+                   source.lys punctuation.lys
+>
+ ^
+ source.lys
+>  support::test::assert( a is Nil            == true )
+ ^^
+ source.lys
+   ^^^^^^^^^^^^^^^
+   source.lys entity.name.type.module.lys
+                  ^^^^^^
+                  source.lys entity.name.function.lys
+                        ^
+                        source.lys punctuation.lys
+                         ^
+                         source.lys
+                          ^
+                          source.lys variable.other.readwrite.ts.lys
+                           ^
+                           source.lys
+                            ^^^
+                            source.lys keyword.lys
+                               ^^^
+                               source.lys support.type.lys
+                                  ^^^^^^^^^^^^
+                                  source.lys
+                                              ^^
+                                              source.lys keyword.operator.lys
+                                                ^
+                                                source.lys
+                                                 ^^^^
+                                                 source.lys constant.language.lys
+                                                     ^
+                                                     source.lys
+                                                      ^
+                                                      source.lys punctuation.lys
+>  support::test::assert( a is Forest         == true )
+ ^^
+ source.lys
+   ^^^^^^^^^^^^^^^
+   source.lys entity.name.type.module.lys
+                  ^^^^^^
+                  source.lys entity.name.function.lys
+                        ^
+                        source.lys punctuation.lys
+                         ^
+                         source.lys
+                          ^
+                          source.lys variable.other.readwrite.ts.lys
+                           ^
+                           source.lys
+                            ^^^
+                            source.lys keyword.lys
+                               ^^^^^^
+                               source.lys support.type.lys
+                                     ^^^^^^^^^
+                                     source.lys
+                                              ^^
+                                              source.lys keyword.operator.lys
+                                                ^
+                                                source.lys
+                                                 ^^^^
+                                                 source.lys constant.language.lys
+                                                     ^
+                                                     source.lys
+                                                      ^
+                                                      source.lys punctuation.lys
+>  support::test::assert( b is Forest         == true )
+ ^^
+ source.lys
+   ^^^^^^^^^^^^^^^
+   source.lys entity.name.type.module.lys
+                  ^^^^^^
+                  source.lys entity.name.function.lys
+                        ^
+                        source.lys punctuation.lys
+                         ^
+                         source.lys
+                          ^
+                          source.lys variable.other.readwrite.ts.lys
+                           ^
+                           source.lys
+                            ^^^
+                            source.lys keyword.lys
+                               ^^^^^^
+                               source.lys support.type.lys
+                                     ^^^^^^^^^
+                                     source.lys
+                                              ^^
+                                              source.lys keyword.operator.lys
+                                                ^
+                                                source.lys
+                                                 ^^^^
+                                                 source.lys constant.language.lys
+                                                     ^
+                                                     source.lys
+                                                      ^
+                                                      source.lys punctuation.lys
+>  support::test::assert( c is Cons           == true )
+ ^^
+ source.lys
+   ^^^^^^^^^^^^^^^
+   source.lys entity.name.type.module.lys
+                  ^^^^^^
+                  source.lys entity.name.function.lys
+                        ^
+                        source.lys punctuation.lys
+                         ^
+                         source.lys
+                          ^
+                          source.lys variable.other.readwrite.ts.lys
+                           ^
+                           source.lys
+                            ^^^
+                            source.lys keyword.lys
+                               ^^^^
+                               source.lys support.type.lys
+                                   ^^^^^^^^^^^
+                                   source.lys
+                                              ^^
+                                              source.lys keyword.operator.lys
+                                                ^
+                                                source.lys
+                                                 ^^^^
+                                                 source.lys constant.language.lys
+                                                     ^
+                                                     source.lys
+                                                      ^
+                                                      source.lys punctuation.lys
+>  support::test::assert( e is Node           == true )
+ ^^
+ source.lys
+   ^^^^^^^^^^^^^^^
+   source.lys entity.name.type.module.lys
+                  ^^^^^^
+                  source.lys entity.name.function.lys
+                        ^
+                        source.lys punctuation.lys
+                         ^
+                         source.lys
+                          ^
+                          source.lys variable.other.readwrite.ts.lys
+                           ^
+                           source.lys
+                            ^^^
+                            source.lys keyword.lys
+                               ^^^^
+                               source.lys support.type.lys
+                                   ^^^^^^^^^^^
+                                   source.lys
+                                              ^^
+                                              source.lys keyword.operator.lys
+                                                ^
+                                                source.lys
+                                                 ^^^^
+                                                 source.lys constant.language.lys
+                                                     ^
+                                                     source.lys
+                                                      ^
+                                                      source.lys punctuation.lys
+>  support::test::assert( e is Tree           == true )
+ ^^
+ source.lys
+   ^^^^^^^^^^^^^^^
+   source.lys entity.name.type.module.lys
+                  ^^^^^^
+                  source.lys entity.name.function.lys
+                        ^
+                        source.lys punctuation.lys
+                         ^
+                         source.lys
+                          ^
+                          source.lys variable.other.readwrite.ts.lys
+                           ^
+                           source.lys
+                            ^^^
+                            source.lys keyword.lys
+                               ^^^^
+                               source.lys support.type.lys
+                                   ^^^^^^^^^^^
+                                   source.lys
+                                              ^^
+                                              source.lys keyword.operator.lys
+                                                ^
+                                                source.lys
+                                                 ^^^^
+                                                 source.lys constant.language.lys
+                                                     ^
+                                                     source.lys
+                                                      ^
+                                                      source.lys punctuation.lys
+>}
+ ^
+ source.lys punctuation.lys

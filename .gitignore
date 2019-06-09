@@ -6,3 +6,8 @@ tests/node_modules
 tests/*-ts
 tests/typings/
 tests/*.js
+node_modules
+build/*.js
+tests/*.js
+tests/generated/*
+xunit.xml

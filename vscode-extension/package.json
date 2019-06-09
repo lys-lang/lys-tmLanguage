@@ -29,6 +29,16 @@
         "language": "lys",
         "scopeName": "source.lys",
         "path": "./syntaxes/Lys.tmLanguage"
+      },
+      {
+        "scopeName": "markdown.lys.codeblock",
+        "path": "./syntaxes/codeblock.json",
+        "injectTo": [
+          "text.html.markdown"
+        ],
+        "embeddedLanguages": {
+          "meta.embedded.block.lys": "lys"
+        }
       }
     ]
   }

@@ -1,0 +1,5 @@
+type A = ^^X | ^^Y | ^^Z
+type B = ^^Xx | ^^Yy | ^^Zz
+var x: ^^A | ^^B | ^^C = 1
+var x: ^^Aa | ^^Ba | ^^Ca = 1
+fun test(x: ^^A | ^^B | ^^C) = 1

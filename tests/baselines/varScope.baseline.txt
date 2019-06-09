@@ -1,0 +1,228 @@
+original file
+-----------------------------------
+var a = 1
+var b = a
+var c = 1
+var d = c
+
+fun x1(): i32 = {
+  fun Y(): i32 = 1
+  Y()
+}
+
+fun x2(): i32 = {
+  var n = 1
+  fun Y(): i32 = n
+  Y()
+}
+
+-----------------------------------
+
+Grammar: Lys.tmLanguage
+-----------------------------------
+>var a = 1
+ ^^^
+ source.lys storage.type.var.lys
+    ^
+    source.lys text.lys
+     ^
+     source.lys entity.name.variable.lys
+      ^
+      source.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys
+         ^
+         source.lys constant.numeric.lys
+>var b = a
+ ^^^
+ source.lys storage.type.var.lys
+    ^
+    source.lys text.lys
+     ^
+     source.lys entity.name.variable.lys
+      ^
+      source.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys
+         ^
+         source.lys variable.other.readwrite.ts.lys
+>var c = 1
+ ^^^
+ source.lys storage.type.var.lys
+    ^
+    source.lys text.lys
+     ^
+     source.lys entity.name.variable.lys
+      ^
+      source.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys
+         ^
+         source.lys constant.numeric.lys
+>var d = c
+ ^^^
+ source.lys storage.type.var.lys
+    ^
+    source.lys text.lys
+     ^
+     source.lys entity.name.variable.lys
+      ^
+      source.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys
+         ^
+         source.lys variable.other.readwrite.ts.lys
+>
+ ^
+ source.lys
+>fun x1(): i32 = {
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^
+     source.lys entity.name.function.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys punctuation.lys
+         ^^
+         source.lys punctuation.lys
+           ^^^
+           source.lys support.type.lys
+              ^
+              source.lys
+               ^
+               source.lys punctuation.lys
+                ^
+                source.lys
+                 ^
+                 source.lys punctuation.lys
+>  fun Y(): i32 = 1
+ ^^
+ source.lys
+   ^^^
+   source.lys storage.type.function.lys.lys
+      ^
+      source.lys text.lys
+       ^
+       source.lys entity.name.function.lys
+        ^
+        source.lys punctuation.lys
+         ^
+         source.lys punctuation.lys
+          ^^
+          source.lys punctuation.lys
+            ^^^
+            source.lys support.type.lys
+               ^
+               source.lys
+                ^
+                source.lys punctuation.lys
+                 ^
+                 source.lys
+                  ^
+                  source.lys constant.numeric.lys
+>  Y()
+ ^^
+ source.lys
+   ^
+   source.lys variable.other.constant.lys
+    ^
+    source.lys punctuation.lys
+     ^
+     source.lys punctuation.lys
+>}
+ ^
+ source.lys punctuation.lys
+>
+ ^
+ source.lys
+>fun x2(): i32 = {
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^
+     source.lys entity.name.function.lys
+       ^
+       source.lys punctuation.lys
+        ^
+        source.lys punctuation.lys
+         ^^
+         source.lys punctuation.lys
+           ^^^
+           source.lys support.type.lys
+              ^
+              source.lys
+               ^
+               source.lys punctuation.lys
+                ^
+                source.lys
+                 ^
+                 source.lys punctuation.lys
+>  var n = 1
+ ^^
+ source.lys
+   ^^^
+   source.lys storage.type.var.lys
+      ^
+      source.lys text.lys
+       ^
+       source.lys entity.name.variable.lys
+        ^
+        source.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys
+           ^
+           source.lys constant.numeric.lys
+>  fun Y(): i32 = n
+ ^^
+ source.lys
+   ^^^
+   source.lys storage.type.function.lys.lys
+      ^
+      source.lys text.lys
+       ^
+       source.lys entity.name.function.lys
+        ^
+        source.lys punctuation.lys
+         ^
+         source.lys punctuation.lys
+          ^^
+          source.lys punctuation.lys
+            ^^^
+            source.lys support.type.lys
+               ^
+               source.lys
+                ^
+                source.lys punctuation.lys
+                 ^
+                 source.lys
+                  ^
+                  source.lys variable.other.readwrite.ts.lys
+>  Y()
+ ^^
+ source.lys
+   ^
+   source.lys variable.other.constant.lys
+    ^
+    source.lys punctuation.lys
+     ^
+     source.lys punctuation.lys
+>}
+ ^
+ source.lys punctuation.lys
+>
+ ^
+ source.lys

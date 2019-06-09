@@ -5,6 +5,12 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true
-    // "*.tm*": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.insertSpaces": true,
+  "files.associations": {
+    "*.YAML-tmLanguage": "yaml",
+    "*.YAML-tmPreferences": "yaml",
+    "*.YAML-tmTheme": "yaml"
   }
 }

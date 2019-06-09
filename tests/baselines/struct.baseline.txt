@@ -1,0 +1,364 @@
+original file
+-----------------------------------
+enum Number {
+  Infinity
+  NDet
+  Real(number: f32)
+  Natural(number: i32)
+  Complex(real: f32, imaginary: f32)
+}
+
+// type Number = Infinity | NDet | Real | Natural | Complex
+
+fun isComplex(number: Number): boolean =
+  match number {
+    case is Real(_) -> false
+    case is Natural(_) -> false
+    case is Complex(_, imaginary) -> imaginary != 0.0
+    else -> false
+  }
+
+fun main(): void = {
+  isComplex(Infinity)
+  isComplex(Real(0.0))
+  isComplex(Natural(123))
+  isComplex(Complex(0.0, 99.1))
+}
+
+-----------------------------------
+
+Grammar: Lys.tmLanguage
+-----------------------------------
+>enum Number {
+ ^^^^
+ source.lys storage.type.type.lys.lys
+     ^
+     source.lys text.lys
+      ^^^^^^
+      source.lys entity.name.class.lys
+            ^
+            source.lys
+             ^
+             source.lys punctuation.lys
+>  Infinity
+ ^^
+ source.lys
+   ^^^^^^^^
+   source.lys entity.name.class.lys
+>  NDet
+ ^^
+ source.lys
+   ^^^^
+   source.lys entity.name.class.lys
+>  Real(number: f32)
+ ^^
+ source.lys
+   ^^^^
+   source.lys entity.name.class.lys
+       ^
+       source.lys punctuation.lys
+        ^^^^^^
+        source.lys variable.parameter.function.lys
+              ^^
+              source.lys punctuation.lys
+                ^^^
+                source.lys support.type.lys
+                   ^
+                   source.lys punctuation.lys
+>  Natural(number: i32)
+ ^^
+ source.lys
+   ^^^^^^^
+   source.lys entity.name.class.lys
+          ^
+          source.lys punctuation.lys
+           ^^^^^^
+           source.lys variable.parameter.function.lys
+                 ^^
+                 source.lys punctuation.lys
+                   ^^^
+                   source.lys support.type.lys
+                      ^
+                      source.lys punctuation.lys
+>  Complex(real: f32, imaginary: f32)
+ ^^
+ source.lys
+   ^^^^^^^
+   source.lys entity.name.class.lys
+          ^
+          source.lys punctuation.lys
+           ^^^^
+           source.lys variable.parameter.function.lys
+               ^^
+               source.lys punctuation.lys
+                 ^^^
+                 source.lys support.type.lys
+                    ^
+                    source.lys punctuation.lys
+                     ^
+                     source.lys
+                      ^^^^^^^^^
+                      source.lys variable.parameter.function.lys
+                               ^^
+                               source.lys punctuation.lys
+                                 ^^^
+                                 source.lys support.type.lys
+                                    ^
+                                    source.lys punctuation.lys
+>}
+ ^
+ source.lys punctuation.lys
+>
+ ^
+ source.lys
+>// type Number = Infinity | NDet | Real | Natural | Complex
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ source.lys comment.lys
+>
+ ^
+ source.lys
+>fun isComplex(number: Number): boolean =
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^^^^^^^^
+     source.lys entity.name.function.lys
+              ^
+              source.lys punctuation.lys
+               ^^^^^^
+               source.lys variable.parameter.function.lys
+                     ^^
+                     source.lys punctuation.lys
+                       ^^^^^^
+                       source.lys support.type.lys
+                             ^
+                             source.lys punctuation.lys
+                              ^^
+                              source.lys punctuation.lys
+                                ^^^^^^^
+                                source.lys support.type.lys
+                                       ^
+                                       source.lys
+                                        ^
+                                        source.lys punctuation.lys
+>  match number {
+ ^^
+ source.lys
+   ^^^^^
+   source.lys keyword.lys
+        ^
+        source.lys
+         ^^^^^^
+         source.lys variable.other.readwrite.ts.lys
+               ^
+               source.lys
+                ^
+                source.lys punctuation.lys
+>    case is Real(_) -> false
+ ^^^^
+ source.lys
+     ^^^^
+     source.lys keyword.lys
+         ^
+         source.lys
+          ^^^
+          source.lys keyword.lys
+             ^^^^
+             source.lys support.type.lys
+                 ^
+                 source.lys punctuation.lys
+                  ^
+                  source.lys variable.other.readwrite.ts.lys
+                   ^
+                   source.lys punctuation.lys
+                    ^
+                    source.lys
+                     ^^
+                     source.lys punctuation.lys
+                       ^
+                       source.lys
+                        ^^^^^
+                        source.lys constant.language.lys
+>    case is Natural(_) -> false
+ ^^^^
+ source.lys
+     ^^^^
+     source.lys keyword.lys
+         ^
+         source.lys
+          ^^^
+          source.lys keyword.lys
+             ^^^^^^^
+             source.lys support.type.lys
+                    ^
+                    source.lys punctuation.lys
+                     ^
+                     source.lys variable.other.readwrite.ts.lys
+                      ^
+                      source.lys punctuation.lys
+                       ^
+                       source.lys
+                        ^^
+                        source.lys punctuation.lys
+                          ^
+                          source.lys
+                           ^^^^^
+                           source.lys constant.language.lys
+>    case is Complex(_, imaginary) -> imaginary != 0.0
+ ^^^^
+ source.lys
+     ^^^^
+     source.lys keyword.lys
+         ^
+         source.lys
+          ^^^
+          source.lys keyword.lys
+             ^^^^^^^
+             source.lys support.type.lys
+                    ^
+                    source.lys punctuation.lys
+                     ^
+                     source.lys variable.other.readwrite.ts.lys
+                      ^
+                      source.lys punctuation.lys
+                       ^
+                       source.lys
+                        ^^^^^^^^^
+                        source.lys variable.other.readwrite.ts.lys
+                                 ^
+                                 source.lys punctuation.lys
+                                  ^
+                                  source.lys
+                                   ^^
+                                   source.lys punctuation.lys
+                                     ^
+                                     source.lys
+                                      ^^^^^^^^^
+                                      source.lys variable.other.readwrite.ts.lys
+                                               ^
+                                               source.lys
+                                                ^^
+                                                source.lys keyword.operator.lys
+                                                  ^
+                                                  source.lys
+                                                   ^^^
+                                                   source.lys constant.numeric.lys
+>    else -> false
+ ^^^^
+ source.lys
+     ^^^^
+     source.lys keyword.lys
+         ^
+         source.lys
+          ^^
+          source.lys punctuation.lys
+            ^
+            source.lys
+             ^^^^^
+             source.lys constant.language.lys
+>  }
+ ^^
+ source.lys
+   ^
+   source.lys punctuation.lys
+>
+ ^
+ source.lys
+>fun main(): void = {
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^^^
+     source.lys entity.name.function.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys punctuation.lys
+           ^^
+           source.lys punctuation.lys
+             ^^^^
+             source.lys support.type.lys
+                 ^
+                 source.lys
+                  ^
+                  source.lys punctuation.lys
+                   ^
+                   source.lys
+                    ^
+                    source.lys punctuation.lys
+>  isComplex(Infinity)
+ ^^
+ source.lys
+   ^^^^^^^^^
+   source.lys entity.name.function.lys
+            ^
+            source.lys punctuation.lys
+             ^^^^^^^^
+             source.lys variable.other.object.lys
+                     ^
+                     source.lys punctuation.lys
+>  isComplex(Real(0.0))
+ ^^
+ source.lys
+   ^^^^^^^^^
+   source.lys entity.name.function.lys
+            ^
+            source.lys punctuation.lys
+             ^^^^
+             source.lys entity.name.function.lys
+                 ^
+                 source.lys punctuation.lys
+                  ^^^
+                  source.lys constant.numeric.lys
+                     ^
+                     source.lys punctuation.lys
+                      ^
+                      source.lys punctuation.lys
+>  isComplex(Natural(123))
+ ^^
+ source.lys
+   ^^^^^^^^^
+   source.lys entity.name.function.lys
+            ^
+            source.lys punctuation.lys
+             ^^^^^^^
+             source.lys entity.name.function.lys
+                    ^
+                    source.lys punctuation.lys
+                     ^^^
+                     source.lys constant.numeric.lys
+                        ^
+                        source.lys punctuation.lys
+                         ^
+                         source.lys punctuation.lys
+>  isComplex(Complex(0.0, 99.1))
+ ^^
+ source.lys
+   ^^^^^^^^^
+   source.lys entity.name.function.lys
+            ^
+            source.lys punctuation.lys
+             ^^^^^^^
+             source.lys entity.name.function.lys
+                    ^
+                    source.lys punctuation.lys
+                     ^^^
+                     source.lys constant.numeric.lys
+                        ^
+                        source.lys punctuation.lys
+                         ^
+                         source.lys
+                          ^^^^
+                          source.lys constant.numeric.lys
+                              ^
+                              source.lys punctuation.lys
+                               ^
+                               source.lys punctuation.lys
+>}
+ ^
+ source.lys punctuation.lys
+>
+ ^
+ source.lys

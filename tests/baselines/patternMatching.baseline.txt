@@ -1,0 +1,302 @@
+original file
+-----------------------------------
+fun test(a: i32): boolean = match a {
+  case 1 -> true
+  else -> false
+}
+
+fun isComplex(number: Number): boolean =
+  match number {
+    case x is Real -> false
+    case x is Infinity -> false
+    case is Infinity -> false
+    case aNaturalNumber is Natural(x) -> {
+      x == 0
+    }
+    case is Complex(_, imaginary) -> imaginary != 0.0
+    else -> false
+  }
+-----------------------------------
+
+Grammar: Lys.tmLanguage
+-----------------------------------
+>fun test(a: i32): boolean = match a {
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^^^
+     source.lys entity.name.function.lys
+         ^
+         source.lys punctuation.lys
+          ^
+          source.lys variable.parameter.function.lys
+           ^^
+           source.lys punctuation.lys
+             ^^^
+             source.lys support.type.lys
+                ^
+                source.lys punctuation.lys
+                 ^^
+                 source.lys punctuation.lys
+                   ^^^^^^^
+                   source.lys support.type.lys
+                          ^
+                          source.lys
+                           ^
+                           source.lys punctuation.lys
+                            ^
+                            source.lys
+                             ^^^^^
+                             source.lys keyword.lys
+                                  ^
+                                  source.lys
+                                   ^
+                                   source.lys variable.other.readwrite.ts.lys
+                                    ^
+                                    source.lys
+                                     ^
+                                     source.lys punctuation.lys
+>  case 1 -> true
+ ^^
+ source.lys
+   ^^^^
+   source.lys keyword.lys
+       ^
+       source.lys
+        ^
+        source.lys constant.numeric.lys
+         ^
+         source.lys
+          ^^
+          source.lys punctuation.lys
+            ^
+            source.lys
+             ^^^^
+             source.lys constant.language.lys
+>  else -> false
+ ^^
+ source.lys
+   ^^^^
+   source.lys keyword.lys
+       ^
+       source.lys
+        ^^
+        source.lys punctuation.lys
+          ^
+          source.lys
+           ^^^^^
+           source.lys constant.language.lys
+>}
+ ^
+ source.lys punctuation.lys
+>
+ ^
+ source.lys
+>fun isComplex(number: Number): boolean =
+ ^^^
+ source.lys storage.type.function.lys.lys
+    ^
+    source.lys text.lys
+     ^^^^^^^^^
+     source.lys entity.name.function.lys
+              ^
+              source.lys punctuation.lys
+               ^^^^^^
+               source.lys variable.parameter.function.lys
+                     ^^
+                     source.lys punctuation.lys
+                       ^^^^^^
+                       source.lys support.type.lys
+                             ^
+                             source.lys punctuation.lys
+                              ^^
+                              source.lys punctuation.lys
+                                ^^^^^^^
+                                source.lys support.type.lys
+                                       ^
+                                       source.lys
+                                        ^
+                                        source.lys punctuation.lys
+>  match number {
+ ^^
+ source.lys
+   ^^^^^
+   source.lys keyword.lys
+        ^
+        source.lys
+         ^^^^^^
+         source.lys variable.other.readwrite.ts.lys
+               ^
+               source.lys
+                ^
+                source.lys punctuation.lys
+>    case x is Real -> false
+ ^^^^
+ source.lys
+     ^^^^
+     source.lys keyword.lys
+         ^
+         source.lys
+          ^
+          source.lys variable.other.readwrite.ts.lys
+           ^
+           source.lys
+            ^^^
+            source.lys keyword.lys
+               ^^^^
+               source.lys support.type.lys
+                   ^
+                   source.lys
+                    ^^
+                    source.lys punctuation.lys
+                      ^
+                      source.lys
+                       ^^^^^
+                       source.lys constant.language.lys
+>    case x is Infinity -> false
+ ^^^^
+ source.lys
+     ^^^^
+     source.lys keyword.lys
+         ^
+         source.lys
+          ^
+          source.lys variable.other.readwrite.ts.lys
+           ^
+           source.lys
+            ^^^
+            source.lys keyword.lys
+               ^^^^^^^^
+               source.lys support.type.lys
+                       ^
+                       source.lys
+                        ^^
+                        source.lys punctuation.lys
+                          ^
+                          source.lys
+                           ^^^^^
+                           source.lys constant.language.lys
+>    case is Infinity -> false
+ ^^^^
+ source.lys
+     ^^^^
+     source.lys keyword.lys
+         ^
+         source.lys
+          ^^^
+          source.lys keyword.lys
+             ^^^^^^^^
+             source.lys support.type.lys
+                     ^
+                     source.lys
+                      ^^
+                      source.lys punctuation.lys
+                        ^
+                        source.lys
+                         ^^^^^
+                         source.lys constant.language.lys
+>    case aNaturalNumber is Natural(x) -> {
+ ^^^^
+ source.lys
+     ^^^^
+     source.lys keyword.lys
+         ^
+         source.lys
+          ^^^^^^^^^^^^^^
+          source.lys variable.other.readwrite.ts.lys
+                        ^
+                        source.lys
+                         ^^^
+                         source.lys keyword.lys
+                            ^^^^^^^
+                            source.lys support.type.lys
+                                   ^
+                                   source.lys punctuation.lys
+                                    ^
+                                    source.lys variable.other.readwrite.ts.lys
+                                     ^
+                                     source.lys punctuation.lys
+                                      ^
+                                      source.lys
+                                       ^^
+                                       source.lys punctuation.lys
+                                         ^
+                                         source.lys
+                                          ^
+                                          source.lys punctuation.lys
+>      x == 0
+ ^^^^^^
+ source.lys
+       ^
+       source.lys variable.other.readwrite.ts.lys
+        ^
+        source.lys
+         ^^
+         source.lys keyword.operator.lys
+           ^
+           source.lys
+            ^
+            source.lys constant.numeric.lys
+>    }
+ ^^^^
+ source.lys
+     ^
+     source.lys punctuation.lys
+>    case is Complex(_, imaginary) -> imaginary != 0.0
+ ^^^^
+ source.lys
+     ^^^^
+     source.lys keyword.lys
+         ^
+         source.lys
+          ^^^
+          source.lys keyword.lys
+             ^^^^^^^
+             source.lys support.type.lys
+                    ^
+                    source.lys punctuation.lys
+                     ^
+                     source.lys variable.other.readwrite.ts.lys
+                      ^
+                      source.lys punctuation.lys
+                       ^
+                       source.lys
+                        ^^^^^^^^^
+                        source.lys variable.other.readwrite.ts.lys
+                                 ^
+                                 source.lys punctuation.lys
+                                  ^
+                                  source.lys
+                                   ^^
+                                   source.lys punctuation.lys
+                                     ^
+                                     source.lys
+                                      ^^^^^^^^^
+                                      source.lys variable.other.readwrite.ts.lys
+                                               ^
+                                               source.lys
+                                                ^^
+                                                source.lys keyword.operator.lys
+                                                  ^
+                                                  source.lys
+                                                   ^^^
+                                                   source.lys constant.numeric.lys
+>    else -> false
+ ^^^^
+ source.lys
+     ^^^^
+     source.lys keyword.lys
+         ^
+         source.lys
+          ^^
+          source.lys punctuation.lys
+            ^
+            source.lys
+             ^^^^^
+             source.lys constant.language.lys
+>  }
+ ^^
+ source.lys
+   ^
+   source.lys punctuation.lys

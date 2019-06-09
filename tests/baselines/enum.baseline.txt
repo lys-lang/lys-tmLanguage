@@ -1,0 +1,92 @@
+original file
+-----------------------------------
+enum Number {
+  Infinity
+  NDet
+  Real(number: f32)
+  Natural(number: i32)
+  Complex(real: f32, imaginary: f32)
+}
+-----------------------------------
+
+Grammar: Lys.tmLanguage
+-----------------------------------
+>enum Number {
+ ^^^^
+ source.lys storage.type.type.lys.lys
+     ^
+     source.lys text.lys
+      ^^^^^^
+      source.lys entity.name.class.lys
+            ^
+            source.lys
+             ^
+             source.lys punctuation.lys
+>  Infinity
+ ^^
+ source.lys
+   ^^^^^^^^
+   source.lys entity.name.class.lys
+>  NDet
+ ^^
+ source.lys
+   ^^^^
+   source.lys entity.name.class.lys
+>  Real(number: f32)
+ ^^
+ source.lys
+   ^^^^
+   source.lys entity.name.class.lys
+       ^
+       source.lys punctuation.lys
+        ^^^^^^
+        source.lys variable.parameter.function.lys
+              ^^
+              source.lys punctuation.lys
+                ^^^
+                source.lys support.type.lys
+                   ^
+                   source.lys punctuation.lys
+>  Natural(number: i32)
+ ^^
+ source.lys
+   ^^^^^^^
+   source.lys entity.name.class.lys
+          ^
+          source.lys punctuation.lys
+           ^^^^^^
+           source.lys variable.parameter.function.lys
+                 ^^
+                 source.lys punctuation.lys
+                   ^^^
+                   source.lys support.type.lys
+                      ^
+                      source.lys punctuation.lys
+>  Complex(real: f32, imaginary: f32)
+ ^^
+ source.lys
+   ^^^^^^^
+   source.lys entity.name.class.lys
+          ^
+          source.lys punctuation.lys
+           ^^^^
+           source.lys variable.parameter.function.lys
+               ^^
+               source.lys punctuation.lys
+                 ^^^
+                 source.lys support.type.lys
+                    ^
+                    source.lys punctuation.lys
+                     ^
+                     source.lys
+                      ^^^^^^^^^
+                      source.lys variable.parameter.function.lys
+                               ^^
+                               source.lys punctuation.lys
+                                 ^^^
+                                 source.lys support.type.lys
+                                    ^
+                                    source.lys punctuation.lys
+>}
+ ^
+ source.lys punctuation.lys
